@@ -4,12 +4,52 @@
   
   <url>
     <loc>https://0xdod.github.io/categories/</loc>
-    <lastmod>2020-12-25T20:38:40+01:00</lastmod>
+    <lastmod>2021-08-15T09:10:39+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://0xdod.github.io/</loc>
-    <lastmod>2020-12-25T20:38:40+01:00</lastmod>
+    <lastmod>2021-08-15T09:10:39+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://0xdod.github.io/tags/hng/</loc>
+    <lastmod>2021-08-15T09:10:39+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://0xdod.github.io/posts/hng-internship/</loc>
+    <lastmod>2021-08-15T09:10:39+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://0xdod.github.io/series/hngi8/</loc>
+    <lastmod>2021-08-15T09:10:39+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://0xdod.github.io/tags/internship/</loc>
+    <lastmod>2021-08-15T09:10:39+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://0xdod.github.io/categories/internship/</loc>
+    <lastmod>2021-08-15T09:10:39+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://0xdod.github.io/posts/</loc>
+    <lastmod>2021-08-15T09:10:39+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://0xdod.github.io/series/</loc>
+    <lastmod>2021-08-15T09:10:39+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://0xdod.github.io/tags/</loc>
+    <lastmod>2021-08-15T09:10:39+01:00</lastmod>
   </url>
   
   <url>
@@ -29,16 +69,6 @@
   
   <url>
     <loc>https://0xdod.github.io/categories/golang/</loc>
-    <lastmod>2020-12-25T20:38:40+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://0xdod.github.io/posts/</loc>
-    <lastmod>2020-12-25T20:38:40+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://0xdod.github.io/tags/</loc>
     <lastmod>2020-12-25T20:38:40+01:00</lastmod>
   </url>
   
@@ -69,10 +99,6 @@
   
   <url>
     <loc>https://0xdod.github.io/projects/</loc>
-  </url>
-  
-  <url>
-    <loc>https://0xdod.github.io/series/</loc>
   </url>
   
 </urlset>
