@@ -1,104 +1,48 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
-    <loc>https://0xdod.github.io/categories/</loc>
-    <lastmod>2021-08-15T09:10:39+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://0xdod.github.io/</loc>
-    <lastmod>2021-08-15T09:10:39+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://0xdod.github.io/tags/hng/</loc>
-    <lastmod>2021-08-15T09:10:39+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://0xdod.github.io/posts/hng-internship/</loc>
-    <lastmod>2021-08-15T09:10:39+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://0xdod.github.io/series/hngi8/</loc>
-    <lastmod>2021-08-15T09:10:39+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://0xdod.github.io/tags/internship/</loc>
-    <lastmod>2021-08-15T09:10:39+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://0xdod.github.io/categories/internship/</loc>
-    <lastmod>2021-08-15T09:10:39+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://0xdod.github.io/posts/</loc>
-    <lastmod>2021-08-15T09:10:39+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://0xdod.github.io/series/</loc>
-    <lastmod>2021-08-15T09:10:39+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://0xdod.github.io/tags/</loc>
-    <lastmod>2021-08-15T09:10:39+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://0xdod.github.io/tags/go/</loc>
+    <loc>https://fibreactive.github.io/categories/</loc>
     <lastmod>2020-12-25T20:38:40+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://0xdod.github.io/categories/go/</loc>
+  </url><url>
+    <loc>https://fibreactive.github.io/</loc>
     <lastmod>2020-12-25T20:38:40+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://0xdod.github.io/tags/gocolly/</loc>
+  </url><url>
+    <loc>https://fibreactive.github.io/tags/go/</loc>
     <lastmod>2020-12-25T20:38:40+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://0xdod.github.io/categories/golang/</loc>
+  </url><url>
+    <loc>https://fibreactive.github.io/categories/go/</loc>
     <lastmod>2020-12-25T20:38:40+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://0xdod.github.io/tags/web-scraping/</loc>
+  </url><url>
+    <loc>https://fibreactive.github.io/tags/gocolly/</loc>
     <lastmod>2020-12-25T20:38:40+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://0xdod.github.io/posts/web-scraping-with-go/</loc>
+  </url><url>
+    <loc>https://fibreactive.github.io/categories/golang/</loc>
     <lastmod>2020-12-25T20:38:40+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://0xdod.github.io/posts/first-post/</loc>
+  </url><url>
+    <loc>https://fibreactive.github.io/posts/</loc>
+    <lastmod>2020-12-25T20:38:40+01:00</lastmod>
+  </url><url>
+    <loc>https://fibreactive.github.io/tags/</loc>
+    <lastmod>2020-12-25T20:38:40+01:00</lastmod>
+  </url><url>
+    <loc>https://fibreactive.github.io/tags/web-scraping/</loc>
+    <lastmod>2020-12-25T20:38:40+01:00</lastmod>
+  </url><url>
+    <loc>https://fibreactive.github.io/posts/web-scraping-with-go/</loc>
+    <lastmod>2020-12-25T20:38:40+01:00</lastmod>
+  </url><url>
+    <loc>https://fibreactive.github.io/posts/first-post/</loc>
     <lastmod>2020-12-08T17:31:54+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://0xdod.github.io/about/</loc>
+  </url><url>
+    <loc>https://fibreactive.github.io/about/</loc>
     <lastmod>2020-11-24T21:24:37+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://0xdod.github.io/contact/</loc>
+  </url><url>
+    <loc>https://fibreactive.github.io/contact/</loc>
     <lastmod>2018-01-28T21:28:46+01:00</lastmod>
+  </url><url>
+    <loc>https://fibreactive.github.io/projects/</loc>
+  </url><url>
+    <loc>https://fibreactive.github.io/series/</loc>
   </url>
-  
-  <url>
-    <loc>https://0xdod.github.io/projects/</loc>
-  </url>
-  
 </urlset>

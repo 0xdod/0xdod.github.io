@@ -2,21 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>go on damiloladolor</title>
-    <link>https://0xdod.github.io/tags/go/</link>
+    <link>https://fibreactive.github.io/tags/go/</link>
     <description>Recent content in go on damiloladolor</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 25 Dec 2020 20:38:40 +0100</lastBuildDate>
-    
-	<atom:link href="https://0xdod.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 25 Dec 2020 20:38:40 +0100</lastBuildDate><atom:link href="https://fibreactive.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Web scraping with go and go-colly</title>
-      <link>https://0xdod.github.io/posts/web-scraping-with-go/</link>
+      <link>https://fibreactive.github.io/posts/web-scraping-with-go/</link>
       <pubDate>Fri, 25 Dec 2020 20:38:40 +0100</pubDate>
       
-      <guid>https://0xdod.github.io/posts/web-scraping-with-go/</guid>
+      <guid>https://fibreactive.github.io/posts/web-scraping-with-go/</guid>
       <description>I have been flirting with go for a few weeks now and I built a simple forum-like website using gin which is a popular web framework for golang. After building the application, I was satisfied with how much I was able to learn about the language so I decided to do another little project with it. While I was browsing the web mindlessly(like most of us do), I stumbled upon a comment that talked about web scrapping in python then an idea popped in my mind, why not scrape the frontpage of a popular online forum then use the data to populate my own database.</description>
     </item>
     
