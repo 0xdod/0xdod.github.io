@@ -2,54 +2,54 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>damiloladolor</title>
-    <link>https://fibreactive.github.io/</link>
+    <link>https://0xdod.github.io/</link>
     <description>Recent content on damiloladolor</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 25 Dec 2020 20:38:40 +0100</lastBuildDate><atom:link href="https://fibreactive.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 25 Dec 2020 20:38:40 +0100</lastBuildDate><atom:link href="https://0xdod.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Web scraping with go and go-colly</title>
-      <link>https://fibreactive.github.io/posts/web-scraping-with-go/</link>
+      <link>https://0xdod.github.io/posts/web-scraping-with-go/</link>
       <pubDate>Fri, 25 Dec 2020 20:38:40 +0100</pubDate>
       
-      <guid>https://fibreactive.github.io/posts/web-scraping-with-go/</guid>
+      <guid>https://0xdod.github.io/posts/web-scraping-with-go/</guid>
       <description>I have been flirting with go for a few weeks now and I built a simple forum-like website using gin which is a popular web framework for golang. After building the application, I was satisfied with how much I was able to learn about the language so I decided to do another little project with it. While I was browsing the web mindlessly(like most of us do), I stumbled upon a comment that talked about web scrapping in python then an idea popped in my mind, why not scrape the frontpage of a popular online forum then use the data to populate my own database.</description>
     </item>
     
     <item>
       <title>First post</title>
-      <link>https://fibreactive.github.io/posts/first-post/</link>
+      <link>https://0xdod.github.io/posts/first-post/</link>
       <pubDate>Tue, 08 Dec 2020 17:31:54 +0100</pubDate>
       
-      <guid>https://fibreactive.github.io/posts/first-post/</guid>
+      <guid>https://0xdod.github.io/posts/first-post/</guid>
       <description>Hello people, this is my first post on my blog, and I hope to write more of posts at least once a week. This is work in progress, I plan to start writing soon on cool things I learn. 🚀</description>
     </item>
     
     <item>
       <title>About</title>
-      <link>https://fibreactive.github.io/about/</link>
+      <link>https://0xdod.github.io/about/</link>
       <pubDate>Tue, 24 Nov 2020 21:24:37 +0100</pubDate>
       
-      <guid>https://fibreactive.github.io/about/</guid>
+      <guid>https://0xdod.github.io/about/</guid>
       <description>Hello, my name is Damilola Dolor, a web developer based in Lagos Nigeria and I love to build efficient server-side applications and APIs. I am currently in my final year studying computer engineering at the University of Lagos. I have a nice dog named Rigsby (after one of my favorite characters in the Mentalist) that I love to teach new tricks once in a while, I guess that&amp;rsquo;s where my magical powers come from &amp;ndash; my ablilty to quickly pick up new tricks, skills etc.</description>
     </item>
     
     <item>
       <title>Contact me</title>
-      <link>https://fibreactive.github.io/contact/</link>
+      <link>https://0xdod.github.io/contact/</link>
       <pubDate>Sun, 28 Jan 2018 21:28:46 +0100</pubDate>
       
-      <guid>https://fibreactive.github.io/contact/</guid>
+      <guid>https://0xdod.github.io/contact/</guid>
       <description>You can contact me through any the following channels:
  Email Twitter Github  </description>
     </item>
     
     <item>
       <title>Projects</title>
-      <link>https://fibreactive.github.io/projects/</link>
+      <link>https://0xdod.github.io/projects/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://fibreactive.github.io/projects/</guid>
+      <guid>https://0xdod.github.io/projects/</guid>
       <description>Here is a list of some of projects I have worked on and deployed.
   A mini blog
  I learnt about the MVC framework for structuring web projects. This was built using Go and Gin framework. I implmented CRUD operations with mongodb as a database. I implemented Authentication and Authorization using JWT. I deployed the app to heroku    An image sharing platform
