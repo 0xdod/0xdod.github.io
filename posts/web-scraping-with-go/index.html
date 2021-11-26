@@ -56,7 +56,7 @@
     
       
       
-      <link rel="stylesheet" href="https://0xdod.github.io/css/coder.min.29160ad60566cb79499ebfb118e9cf8e0fccd845f8381f84fa968d4e273d0182.css" integrity="sha256-KRYK1gVmy3lJnr&#43;xGOnPjg/M2EX4OB&#43;E&#43;paNTic9AYI=" crossorigin="anonymous" media="screen" />
+      <link rel="stylesheet" href="https://0xdod.github.io/css/coder.min.94de5c5b83b485816fdc1241eda6b6ea79bba3fc0000561cc246a62fe20d30f1.css" integrity="sha256-lN5cW4O0hYFv3BJB7aa26nm7o/wAAFYcwkamL&#43;INMPE=" crossorigin="anonymous" media="screen" />
     
 
     
@@ -143,7 +143,7 @@
             </span>
             <span class="reading-time">
               <i class="fas fa-clock"></i>
-              5-minute read
+              4-minute read
             </span>
           </div>
           <div class="categories">
@@ -158,7 +158,7 @@
       <span class="separator">•</span>
     <a href="https://0xdod.github.io/tags/go/">go</a>
       <span class="separator">•</span>
-    <a href="https://0xdod.github.io/tags/gocolly/">gocolly</a></div>
+    <a href="https://0xdod.github.io/tags/colly/">colly</a></div>
 
         </div>
         <div><a href="https://0xdod.github.io/posts/web-scraping-with-go/#disqus_thread"></a></div>
@@ -168,8 +168,7 @@
         
           <img src='https://0xdod.github.io/images/posts/golang.png' alt="Featured image"/>
         
-        <p>I have been flirting with go for a few weeks now and I built a simple forum-like website using <a href="https://github.com/gin-gonic/gin">gin</a> which is a popular web framework for golang. After building the application, I was satisfied with how much I was able to learn about the language so I decided to do another little project with it. While I was browsing the web mindlessly(like most of us do), I stumbled upon a comment that talked about web scrapping in python then an idea popped in my mind, why not scrape the frontpage of a popular online forum then use the data to populate my own database. Now, scraping a website is not illegal, but it&rsquo;s good you should know what you can and cannot scrape from a website. Many websites have a <strong>robots.txt</strong> file which gives such information (checkout <a href="https://google.com/robots.txt)">https://google.com/robots.txt)</a>. While there are tons of web scrapping tutorials on the web mostly in python, I felt there weren&rsquo;t enough of them in go so I decided to write one.  I did my research and found out an elegant golang framework for scraping websites called <a href="https://go-colly.org">colly</a>, and with this tool I was able to scrape the frontpage of a popular Nigerian forum called <a href="https://nairaland.com/">Nairaland</a>.</p>
-<p>The Go language has a ton of hype around it as it&rsquo;s relatively new, the syntax is relatively easy to pick up as compared to other statically typed languages, it is very fast and natively supports concurrency which makes it a language of choice for many in building cloud services and network applications. We can leverage this speed to scrape websites in a fast and easy way.</p>
+        <p>In this post, I will show you how to use Go and <a href="https://go-colly.org">colly</a> for web scraping by trying to scrape the frontpage of a popular Nigerian forum called <a href="https://nairaland.com/">Nairaland</a>.</p>
 <h5 id="web-scraping">Web Scraping</h5>
 <p><a href="https://en.wikipedia.org/wiki/Web_scraping">Web scraping</a> is a form of data extraction that basically extracts data from websites. A web scraper is usually a bot that uses the HTTP protocol to access websites, extract HTML elements from them and use the data for various purposes.
 I&rsquo;ll be sharing with you how you can scrape a website with minimal effort in go, let&rsquo;s go 🚀</p>

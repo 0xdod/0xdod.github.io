@@ -13,16 +13,8 @@
       <pubDate>Fri, 25 Dec 2020 20:38:40 +0100</pubDate>
       
       <guid>https://0xdod.github.io/posts/web-scraping-with-go/</guid>
-      <description>I have been flirting with go for a few weeks now and I built a simple forum-like website using gin which is a popular web framework for golang. After building the application, I was satisfied with how much I was able to learn about the language so I decided to do another little project with it. While I was browsing the web mindlessly(like most of us do), I stumbled upon a comment that talked about web scrapping in python then an idea popped in my mind, why not scrape the frontpage of a popular online forum then use the data to populate my own database.</description>
-    </item>
-    
-    <item>
-      <title>First post</title>
-      <link>https://0xdod.github.io/posts/first-post/</link>
-      <pubDate>Tue, 08 Dec 2020 17:31:54 +0100</pubDate>
-      
-      <guid>https://0xdod.github.io/posts/first-post/</guid>
-      <description>Hello people, this is my first post on my blog, and I hope to write more of posts at least once a week. This is work in progress, I plan to start writing soon on cool things I learn. 🚀</description>
+      <description>In this post, I will show you how to use Go and colly for web scraping by trying to scrape the frontpage of a popular Nigerian forum called Nairaland.
+Web Scraping Web scraping is a form of data extraction that basically extracts data from websites. A web scraper is usually a bot that uses the HTTP protocol to access websites, extract HTML elements from them and use the data for various purposes.</description>
     </item>
     
     <item>
@@ -31,7 +23,7 @@
       <pubDate>Tue, 24 Nov 2020 21:24:37 +0100</pubDate>
       
       <guid>https://0xdod.github.io/about/</guid>
-      <description>Hello, my name is Damilola Dolor, a web developer based in Lagos Nigeria and I love to build efficient server-side applications and APIs. I am currently in my final year studying computer engineering at the University of Lagos. I have a nice dog named Rigsby (after one of my favorite characters in the Mentalist) that I love to teach new tricks once in a while, I guess that&amp;rsquo;s where my magical powers come from &amp;ndash; my ablilty to quickly pick up new tricks, skills etc.</description>
+      <description>Hello, my name is Damilola Dolor and I am a software developer based in Lagos Nigeria. I am currently not employed 😭 and open to opportunities both remote and on-site 😂. Being self-taught for the most part, I have been able to gather skills required to build web applications some of which are listed my portfolio. I mostly work with Javascript, Python and Go, and open to learning relevant skills, using the best tools to approach a problem.</description>
     </item>
     
     <item>
@@ -40,7 +32,7 @@
       <pubDate>Sun, 28 Jan 2018 21:28:46 +0100</pubDate>
       
       <guid>https://0xdod.github.io/contact/</guid>
-      <description>You can contact me through any the following channels:
+      <description>You can reach me through any the following channels:
  Email Twitter Github  </description>
     </item>
     
@@ -50,10 +42,10 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://0xdod.github.io/projects/</guid>
-      <description>Here is a list of some of projects I have worked on and deployed.
-  A mini blog
- I learnt about the MVC framework for structuring web projects. This was built using Go and Gin framework. I implmented CRUD operations with mongodb as a database. I implemented Authentication and Authorization using JWT. I deployed the app to heroku    An image sharing platform
- This was built using Javascript.</description>
+      <description>Here is a list of some of projects I have worked on.
+  A mini forum
+ A forum site where users can create posts, comment on a post, like posts etc. This was built using Go and Gin framework, backed by MongoDB. View source code    An image sharing platform
+ An image sharing site, kind of like a lazy clone of imgur. This was built using Javascript + MongoDB.</description>
     </item>
     
   </channel>

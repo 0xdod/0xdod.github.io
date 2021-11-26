@@ -5,6 +5,9 @@
     <loc>https://0xdod.github.io/categories/</loc>
     <lastmod>2020-12-25T20:38:40+01:00</lastmod>
   </url><url>
+    <loc>https://0xdod.github.io/tags/colly/</loc>
+    <lastmod>2020-12-25T20:38:40+01:00</lastmod>
+  </url><url>
     <loc>https://0xdod.github.io/</loc>
     <lastmod>2020-12-25T20:38:40+01:00</lastmod>
   </url><url>
@@ -12,9 +15,6 @@
     <lastmod>2020-12-25T20:38:40+01:00</lastmod>
   </url><url>
     <loc>https://0xdod.github.io/categories/go/</loc>
-    <lastmod>2020-12-25T20:38:40+01:00</lastmod>
-  </url><url>
-    <loc>https://0xdod.github.io/tags/gocolly/</loc>
     <lastmod>2020-12-25T20:38:40+01:00</lastmod>
   </url><url>
     <loc>https://0xdod.github.io/categories/golang/</loc>
@@ -31,9 +31,6 @@
   </url><url>
     <loc>https://0xdod.github.io/posts/web-scraping-with-go/</loc>
     <lastmod>2020-12-25T20:38:40+01:00</lastmod>
-  </url><url>
-    <loc>https://0xdod.github.io/posts/first-post/</loc>
-    <lastmod>2020-12-08T17:31:54+01:00</lastmod>
   </url><url>
     <loc>https://0xdod.github.io/about/</loc>
     <lastmod>2020-11-24T21:24:37+01:00</lastmod>
