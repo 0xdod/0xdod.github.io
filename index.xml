@@ -37,15 +37,15 @@ Web Scraping Web scraping is a form of data extraction that basically extracts d
     </item>
     
     <item>
-      <title>Projects</title>
-      <link>https://0xdod.github.io/projects/</link>
+      <title>Portfolio</title>
+      <link>https://0xdod.github.io/portfolio/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://0xdod.github.io/projects/</guid>
-      <description>Here is a list of some of projects I have worked on.
+      <guid>https://0xdod.github.io/portfolio/</guid>
+      <description>Personal Projects Here&amp;rsquo;s a list of some projects I&amp;rsquo;ve been able to build while learning to code:
   A mini forum
  A forum site where users can create posts, comment on a post, like posts etc. This was built using Go and Gin framework, backed by MongoDB. View source code    An image sharing platform
- An image sharing site, kind of like a lazy clone of imgur. This was built using Javascript + MongoDB.</description>
+ An image sharing site, kind of like a lazy clone of imgur.</description>
     </item>
     
   </channel>
