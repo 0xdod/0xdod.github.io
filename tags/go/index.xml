@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>go on damiloladolor</title>
-    <link>https://0xdod.github.io/tags/go/</link>
+    <link>https://damiloladolor.me/tags/go/</link>
     <description>Recent content in go on damiloladolor</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 25 Dec 2020 20:38:40 +0100</lastBuildDate><atom:link href="https://0xdod.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 25 Dec 2020 20:38:40 +0100</lastBuildDate><atom:link href="https://damiloladolor.me/tags/go/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Web scraping with go and go-colly</title>
-      <link>https://0xdod.github.io/posts/web-scraping-with-go/</link>
+      <link>https://damiloladolor.me/posts/web-scraping-with-go/</link>
       <pubDate>Fri, 25 Dec 2020 20:38:40 +0100</pubDate>
       
-      <guid>https://0xdod.github.io/posts/web-scraping-with-go/</guid>
+      <guid>https://damiloladolor.me/posts/web-scraping-with-go/</guid>
       <description>In this post, I will show you how to use Go and colly for web scraping by trying to scrape the frontpage of a popular Nigerian forum called Nairaland.
 Web Scraping Web scraping is a form of data extraction that basically extracts data from websites. A web scraper is usually a bot that uses the HTTP protocol to access websites, extract HTML elements from them and use the data for various purposes.</description>
     </item>

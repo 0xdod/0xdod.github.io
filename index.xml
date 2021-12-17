@@ -2,46 +2,46 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>damiloladolor</title>
-    <link>https://0xdod.github.io/</link>
+    <link>https://damiloladolor.me/</link>
     <description>Recent content on damiloladolor</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 25 Dec 2020 20:38:40 +0100</lastBuildDate><atom:link href="https://0xdod.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 25 Dec 2020 20:38:40 +0100</lastBuildDate><atom:link href="https://damiloladolor.me/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Web scraping with go and go-colly</title>
-      <link>https://0xdod.github.io/posts/web-scraping-with-go/</link>
+      <link>https://damiloladolor.me/posts/web-scraping-with-go/</link>
       <pubDate>Fri, 25 Dec 2020 20:38:40 +0100</pubDate>
       
-      <guid>https://0xdod.github.io/posts/web-scraping-with-go/</guid>
+      <guid>https://damiloladolor.me/posts/web-scraping-with-go/</guid>
       <description>In this post, I will show you how to use Go and colly for web scraping by trying to scrape the frontpage of a popular Nigerian forum called Nairaland.
 Web Scraping Web scraping is a form of data extraction that basically extracts data from websites. A web scraper is usually a bot that uses the HTTP protocol to access websites, extract HTML elements from them and use the data for various purposes.</description>
     </item>
     
     <item>
       <title>About</title>
-      <link>https://0xdod.github.io/about/</link>
+      <link>https://damiloladolor.me/about/</link>
       <pubDate>Tue, 24 Nov 2020 21:24:37 +0100</pubDate>
       
-      <guid>https://0xdod.github.io/about/</guid>
-      <description>Hello, my name is Damilola Dolor and I am a software developer based in Lagos Nigeria. I am currently not employed 😭 and open to opportunities both remote and on-site 😂. Being self-taught for the most part, I have been able to gather skills required to build web applications some of which are listed my portfolio. I mostly work with Javascript, Python and Go, and open to learning relevant skills, using the best tools to approach a problem.</description>
+      <guid>https://damiloladolor.me/about/</guid>
+      <description>Hello, my name is Damilola Dolor and I am a software developer based in Lagos Nigeria. I am currently not employed 😭 and open to opportunities both remote and onsite 😂. Being self-taught for the most part, I have been able to gather skills required for web development by partcipating in hackathons, virtual internships and building projects - some of which are listed in my portfolio. I mostly work with Javascript, Python and Go, and I&amp;rsquo;m open to learning relevant skills and using the best tools to solve a problem.</description>
     </item>
     
     <item>
       <title>Contact me</title>
-      <link>https://0xdod.github.io/contact/</link>
+      <link>https://damiloladolor.me/contact/</link>
       <pubDate>Sun, 28 Jan 2018 21:28:46 +0100</pubDate>
       
-      <guid>https://0xdod.github.io/contact/</guid>
+      <guid>https://damiloladolor.me/contact/</guid>
       <description>You can reach me through any the following channels:
  Email Twitter Github  </description>
     </item>
     
     <item>
       <title>Portfolio</title>
-      <link>https://0xdod.github.io/portfolio/</link>
+      <link>https://damiloladolor.me/portfolio/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://0xdod.github.io/portfolio/</guid>
+      <guid>https://damiloladolor.me/portfolio/</guid>
       <description>Personal Projects Here&amp;rsquo;s a list of some projects I&amp;rsquo;ve been able to build while learning to code:
   A mini forum
  A forum site where users can create posts, comment on a post, like posts etc. This was built using Go and Gin framework, backed by MongoDB. View source code    An image sharing platform
