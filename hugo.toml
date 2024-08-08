@@ -1,0 +1,55 @@
+baseURL = 'https://damiloladolor.me/'
+languageCode = 'en-us'
+title = 'dod'
+theme = "archie"
+copyright= '© Damilola'
+
+# Code Highlight
+pygmentsstyle = "monokai"
+pygmentscodefences = true
+pygmentscodefencesguesssyntax = true
+
+paginate = 5
+
+[params]
+mode="auto" # color-mode → light,dark,toggle or auto
+useCDN=false # don't use CDNs for fonts and icons, instead serve them locally.
+subtitle = "Damilola's Blog"
+mathjax = true # enable MathJax support
+katex = true # enable KaTeX support
+
+
+# Social Tags
+
+[[params.social]]
+name = "GitHub"
+icon = "github"
+url = "https://github.com/0xdod/"
+
+[[params.social]]
+name = "Twitter"
+icon = "twitter"
+url = "https://twitter.com/0xdod/"
+
+
+# Menu
+
+[[menu.main]]
+name = "Home"
+url = "/"
+weight = 1
+
+[[menu.main]]
+name = "Posts"
+url = "/posts"
+weight = 2
+
+[[menu.main]]
+name = "About"
+url = "/about"
+weight = 3
+
+[[menu.main]]
+name = "Tags"
+url = "/tags"
+weight = 4
