@@ -7,7 +7,21 @@
     <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>© Damilola</copyright>
-    <lastBuildDate></lastBuildDate>
+    <lastBuildDate>Thu, 08 Aug 2024 02:50:46 +0100</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Understanding Algorithm Analysis</title>
+      <link>http://localhost:1313/posts/algorithms/</link>
+      <pubDate>Thu, 08 Aug 2024 02:50:46 +0100</pubDate>
+      <guid>http://localhost:1313/posts/algorithms/</guid>
+      <description>Introduction What is an algorithm Examples of algorithms Why do we need algorithms Why study algorithms Analysis of algorithms Why is it important Motivation Tools of the trade :w</description>
+    </item>
+    <item>
+      <title>About</title>
+      <link>http://localhost:1313/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/about/</guid>
+      <description>Hello! I&amp;rsquo;m Damilola&#xA;I work as a software engineer during the day and fight crime in my neighborhood at night 🦇. I have been writing software professionally since 2021, working mostly with Typescript (NestJS) and Go. In recent times, I have been investing my time learning about cloud technologies and DevOps practices, picking up 2 AWS certifications in the process (I&amp;rsquo;m not bragging 😎).&#xA;I also love to read about system architecture, algorithms, blockchain and crypto technologies, and exploring new programming languages (like I&amp;rsquo;m learning Zig just for the plot).</description>
+    </item>
   </channel>
 </rss>

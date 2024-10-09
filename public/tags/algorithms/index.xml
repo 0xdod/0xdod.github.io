@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on dod</title>
-    <link>http://localhost:1313/posts/</link>
-    <description>Recent content in Posts on dod</description>
+    <title>Algorithms on dod</title>
+    <link>http://localhost:1313/tags/algorithms/</link>
+    <description>Recent content in Algorithms on dod</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>© Damilola</copyright>
     <lastBuildDate>Thu, 08 Aug 2024 02:50:46 +0100</lastBuildDate>
-    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/algorithms/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Understanding Algorithm Analysis</title>
       <link>http://localhost:1313/posts/algorithms/</link>
