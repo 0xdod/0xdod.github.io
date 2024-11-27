@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html><head lang="en"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Compose Your App: Deploying and Monitoring a Full-Stack App with Modern DevOps Tools. - dod</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="An article on deploying and monitoring containerized applications" />
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content="http://localhost:1313/posts/compose-your-apps/">
+  <meta property="og:site_name" content="dod">
+  <meta property="og:title" content="Compose Your App: Deploying and Monitoring a Full-Stack App with Modern DevOps Tools.">
+  <meta property="og:description" content="An article on deploying and monitoring containerized applications">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-11-27T01:50:50+01:00">
+    <meta property="article:modified_time" content="2024-11-27T01:50:50+01:00">
+    <meta property="article:tag" content="Docker">
+    <meta property="article:tag" content="Docker-Compose">
+    <meta property="article:tag" content="Devops">
+    <meta property="article:tag" content="Devopsdojo-Cv-Challenge">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Compose Your App: Deploying and Monitoring a Full-Stack App with Modern DevOps Tools.">
+  <meta name="twitter:description" content="An article on deploying and monitoring containerized applications">
+<script src="http://localhost:1313/js/feather.min.js"></script>
+	
+	
+        <link href="http://localhost:1313/css/fonts.2c2227b81b1970a03e760aa2e6121cd01f87c88586803cbb282aa224720a765f.css" rel="stylesheet">
+	
+
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.5cebd7d4fb2b97856af8d32a6def16164fcf7d844e98e236fcb3559655020373.css" />
+		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="http://localhost:1313/css/dark.d22e2a2879d933a4b781535fc4c4c716e9f9d35ea4986dd0cbabda82effc4bdd.css" media="(prefers-color-scheme: dark)"  />
+	
+
+	
+	
+		<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+		</script>
+
+		
+		<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			tex2jax: {
+				inlineMath: [['$','$'], ['\\(','\\)']],
+				displayMath: [['$$','$$'], ['\[','\]']],
+				processEscapes: true,
+				processEnvironments: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+				TeX: { equationNumbers: { autoNumber: "AMS" },
+						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
+			}
+		});
+		</script>
+	
+
+	
+	
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+		<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
+		<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+
+		
+		<script>
+			document.addEventListener("DOMContentLoaded", function() {
+					renderMathInElement(document.body, {
+							delimiters: [
+									{left: "$$", right: "$$", display: true},
+									{left: "$", right: "$", display: false}
+							]
+					});
+			});
+			</script>
+	
+
+	
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="http://localhost:1313/">dod</a>
+	</div>
+	<nav>
+		
+		<a href="/">Home</a>
+		
+		<a href="/posts">Posts</a>
+		
+		<a href="/about">About</a>
+		
+		<a href="/tags">Tags</a>
+		
+		
+	</nav>
+</header>
+
+<main>
+	<article>
+		<div class="title">
+			<h1 class="title">Compose Your App: Deploying and Monitoring a Full-Stack App with Modern DevOps Tools.</h1>
+			<div class="meta">Posted on Nov 27, 2024</div>
+		</div>
+		
+		<div class="tldr">
+			<strong>tl;dr:</strong>
+			Deploying mutiple containers with docker-compose and setting up monitoring with prometheus, cadvisor, grafana, loki and promtail.
+		</div>
+
+		
+		<div class="toc">
+		<strong>Table of contents:</strong>
+		<nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#dockerization">Dockerization</a></li>
+    <li><a href="#reverse-proxy-setup">Reverse Proxy Setup</a></li>
+    <li><a href="#monitoring-and-logging">Monitoring and Logging</a></li>
+    <li><a href="#cloud-deployment">Cloud Deployment</a></li>
+    <li><a href="#wrapping-up">Wrapping Up</a></li>
+  </ul>
+</nav>
+		</div>
+
+		<section class="body">
+			<h2 id="introduction">Introduction</h2>
+<p>This year I decided to venture into the realm of practical DevOps adventures and I was lucky to stumble upon a set of DevOps challenges spanning 6 weeks, where each week we battle with some unique problem-solving scenarios involving various DevOps tools and technologies. This article is a documentation of my first challenge which is <em>Deploying a containerized application and monitoring stack to the cloud, and configuring a reverse proxy.</em></p>
+<p>The goal was to deploy a full-stack application with a React frontend, FastAPI backend and a PostgreSQL database in separate containers with docker-compose, putting all HTTP services behind a reverse proxy and managing configuration for the reverse proxy, collecting logs and container metrics and building a dashboard to visualize them.</p>
+<p>To achieve this, I had to learn about:</p>
+<ul>
+<li>Deploying multi-container applications with <a href="https://docs.docker.com/compose/"><strong>docker-compose</strong></a></li>
+<li>Setting up <a href="https://www.adminer.org/">adminer</a> for database management.</li>
+<li>Configuring a reverse proxy with <a href="https://nginxproxymanager.com"><strong>Nginx Proxy Manager</strong></a></li>
+<li>Collecting metrics with <a href="https://prometheus.io"><strong>prometheus</strong></a> and <a href="https://github.com/google/cadvisor"><strong>cAdvisor</strong></a></li>
+<li>Aggregating logs with <a href="https://grafana.com/docs/loki/latest/"><strong>Loki</strong></a> and <a href="https://grafana.com/docs/loki/latest/send-data/promtail/"><strong>Promtail</strong></a></li>
+<li>Adding dashboards to <a href="https://grafana.com/grafana/">Grafana</a>.</li>
+<li>Deploying to a VM on the cloud with a custom domain.</li>
+</ul>
+<p>Now let&rsquo;s proceed.</p>
+<h2 id="dockerization">Dockerization</h2>
+<p>It might not be obvious, but to &ldquo;dockerize&rdquo; our application, we need to have <a href="https://docs.docker.com/get-started/get-docker/">docker</a> running and use docker-compose to deploy multiple containers, one for each service. The services to be deployed include:</p>
+<ul>
+<li>Frontend service</li>
+<li>Backend service</li>
+<li>Postgres service</li>
+<li>Adminer service</li>
+<li>Nginx reverse proxy service</li>
+<li>Grafana service</li>
+<li>Prometheus service</li>
+<li>Loki service</li>
+<li>Promtail service</li>
+<li>cAdvisor service</li>
+</ul>
+<p>All these services will be deployed on a single VM in the cloud, the services can be categorized into two stacks each with a docker-compose configuration file:</p>
+<ul>
+<li>An application stack: Frontend, Backend, Postgres, Adminer, Nginx proxy manager</li>
+<li>A monitoring stack: Grafana, Prometheus, Loki, Promtail and cAdvisor</li>
+</ul>
+<p>We begin with the application stack, we first have to build docker images for our backend and frontend services and we do that by creating two <code>Dockerfile</code>s in our project&rsquo;s root directory. The link to the project repo can be found <a href="https://github.com/The-DevOps-Dojo/cv-challenge01">here</a>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone https://github.com/The-DevOps-Dojo/cv-challenge01.git
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cd cv-challenge01
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>touch Dockerfile.backend Dockerfile.frontend
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="display:flex;"><span><span style="color:#75715e"># Dockerfile.backend</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> python:3.10-slim</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">WORKDIR</span><span style="color:#e6db74"> /opt/dojo</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> apt-get update <span style="color:#f92672">&amp;&amp;</span> apt-get install -y curl<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> curl -sSL https://install.python-poetry.org | POETRY_HOME<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/opt/poetry&#34;</span> POETRY_VERSION<span style="color:#f92672">=</span>1.8.3 python3 -<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENV</span> PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/opt/poetry/bin:</span><span style="color:#e6db74">${</span>PATH<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> backend/pyproject.toml backend/poetry.lock .<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> poetry install<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENV</span> PYTHONPATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/opt/dojo&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> backend/ .<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> curl -o wait-for-it.sh https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> chmod +x wait-for-it.sh<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">EXPOSE</span><span style="color:#e6db74"> 8000</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">CMD</span> [<span style="color:#e6db74">&#34;sh&#34;</span>, <span style="color:#e6db74">&#34;-c&#34;</span>, <span style="color:#e6db74">&#34;./wait-for-it.sh -s postgres:5432 -- poetry run bash ./prestart.sh &amp;&amp; poetry run uvicorn --host 0.0.0.0 --port 8000 app.main:app --reload&#34;</span>]<span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="display:flex;"><span><span style="color:#75715e"># Dockerfile.frontend</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> node:18 AS build</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">WORKDIR</span><span style="color:#e6db74"> /opt/app</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> frontend/package.json frontend/package-lock.json ./<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> npm install<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> frontend/ .<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENV</span> VITE_API_URL<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://&lt;localhost or VM server hostname/ip&gt;&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> npm run build<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> nginx:stable-alpine AS production</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> --from<span style="color:#f92672">=</span>build /opt/app/dist /usr/share/nginx/html<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">EXPOSE</span><span style="color:#e6db74"> 80</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">CMD</span> [<span style="color:#e6db74">&#34;nginx&#34;</span>, <span style="color:#e6db74">&#34;-g&#34;</span>, <span style="color:#e6db74">&#34;daemon off;&#34;</span>]<span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><p>Now that we have our Dockerfiles ready, we need to create our docker-compose configuration file for the application stack.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>touch docker-compose.app.yml
+</span></span></code></pre></div><p>and the content includes the following:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">services</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">frontend</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">build</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">context</span>: <span style="color:#ae81ff">.</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">dockerfile</span>: <span style="color:#ae81ff">Dockerfile.frontend</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">networks</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">app_network</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">postgres</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">postgres:16</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">POSTGRES_DB=challenge01</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">POSTGRES_PASSWORD=Pssw0rd</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">postgres:/var/lib/postgresql/data</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;5432:5432&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">networks</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">app_network</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">backend</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">build</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">context</span>: <span style="color:#ae81ff">.</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">dockerfile</span>: <span style="color:#ae81ff">Dockerfile.backend</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">networks</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">app_network</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">depends_on</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">postgres</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">adminer</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">adminer</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">always</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">networks</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">app_network</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">proxy-manager</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#e6db74">&#34;jc21/nginx-proxy-manager:latest&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">unless-stopped</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;80:80&#34;</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;443:443&#34;</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;81:81&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">./data:/data</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">./letsencrypt:/etc/letsencrypt</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">networks</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">app_network</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">networks</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">app_network</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">driver</span>: <span style="color:#ae81ff">bridge</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">postgres</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">driver</span>: <span style="color:#ae81ff">local</span>
+</span></span></code></pre></div><p>Modify the <code>backend/.env</code> file to include our database credentials, we are hardcoding these in the docker-compose file for convenience, in a production environment, this is bad practice as secrets as this should not be exposed publicly.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>POSTGRES_SERVER<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;postgres&#34;</span>
+</span></span><span style="display:flex;"><span>POSTGRES_PORT<span style="color:#f92672">=</span><span style="color:#ae81ff">5432</span>
+</span></span><span style="display:flex;"><span>POSTGRES_DB<span style="color:#f92672">=</span>challenge01
+</span></span><span style="display:flex;"><span>POSTGRES_USER<span style="color:#f92672">=</span>postgres
+</span></span><span style="display:flex;"><span>POSTGRES_PASSWORD<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Pssw0rd&#34;</span>
+</span></span></code></pre></div><p>With the enviroment variables set, we can run our docker-compose command to build and run our code. But remember we created a <code>docker-compose.app.yml</code> file and we will be creating another config file for the monitoring stack but the docker-compose tool uses a <code>docker-compose.yml</code> file as default which can be overriden by passing the <code>-f</code> flag to the command. So we have the option to pass this file explicitly with the <code>-f</code> flag or we can set an appropriate variable to tell docker-compose where to find the config files. We would be taking the latter approach.</p>
+<p>Create a <code>.env</code> file in the project&rsquo;s root directory and set the contents to the following:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>COMPOSE_FILE<span style="color:#f92672">=</span>docker-compose.app.yml
+</span></span></code></pre></div><p>This tells docker-compose where to find the configuration files. With this setup, we can run our docker-compose command</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker-compose up -d --build
+</span></span></code></pre></div><p>This would build and start the services we have defined so far, all our services should be up, but how do we access them?</p>
+<h2 id="reverse-proxy-setup">Reverse Proxy Setup</h2>
+<p>A <strong>reverse proxy</strong> is a server that sits between client devices and backend servers, forwarding client requests to the appropriate server and then returning the server&rsquo;s response back to the client. It acts as an intermediary, managing traffic and providing various benefits like security, scalability, and load balancing. In this challenge, we will be using Nginx and nginx proxy manager to manage traffic to our containers.</p>
+<p>If you inspect our <code>docker-compose.app.yml</code> file, you would notice only our proxy-manager service has the host-container ports mapped, <code>80</code> for HTTP, <code>443</code> for HTTPS and <code>81</code> is an admin interface for nginx proxy manager, this is the only http service we are exposing to the internet, traffic would be routed internally through our reverse proxy.</p>
+<p>Navigate to <code>http://localhost:81</code> (or your server&rsquo;s IP/DNS hostname on port 81) and you should see the admin login interface.</p>
+<p><img src="images/nginx-proxy-manager-login.png" alt="nginx proxy manager login" title="Nginx Proxy Manager"></p>
+<p>After logging in for the first time you are asked to input a new password and email, then you should be able to set proxy rules to route traffic from our proxy-manager container to other containers since they are in the same network according to our config file.</p>
+<p><img src="images/nginx-proxy-manager-logged-in.png" alt="nginx proxy manager home" title="Nginx Proxy Manager"></p>
+<p>Click on &ldquo;Proxy Hosts&rdquo; to begin configuring proxy setting for your services.</p>
+<p><img src="images/nginx-proxy-manager-proxy-hosts.png" alt="nginx proxy manager proxy host" title="Nginx Proxy Manager"></p>
+<p>To add a proxy host configuration, click on the &ldquo;Add Proxy Host&rdquo; button and it should bring up</p>
+<p><img src="images/add-proxy-host.png" alt="nginx proxy manager add proxy host" title="Nginx Proxy Manager"></p>
+<p>Put your server domain name in the &ldquo;Domain Names&rdquo; input, and put the value <code>proxy-manager</code> as defined in our compose config as the Forward destination on port 80, so every request is forwarded to port 80, then navigate to the &ldquo;Custom Locations&rdquo; tab to set routing rules.</p>
+<p><img src="images/custom-location.png" alt="nginx proxy manager add proxy host" title="Nginx Proxy Manager"></p>
+<p>For each entry in the table below, click on &ldquo;Add Location&rdquo; to define the following routing rules.</p>
+<table>
+<thead>
+<tr>
+<th>Location</th>
+<th>Forward Hostname/IP</th>
+<th>Port</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/</td>
+<td>frontend</td>
+<td>80</td>
+</tr>
+<tr>
+<td>/api</td>
+<td>backend</td>
+<td>8000</td>
+</tr>
+<tr>
+<td>/docs</td>
+<td>backend/api/v1/openapi.json</td>
+<td>8000</td>
+</tr>
+<tr>
+<td>/prometheus</td>
+<td>prometheus</td>
+<td>9090</td>
+</tr>
+<tr>
+<td>/grafana</td>
+<td>grafana</td>
+<td>3000</td>
+</tr>
+<tr>
+<td>/loki</td>
+<td>loki</td>
+<td>3100</td>
+</tr>
+<tr>
+<td>/promtail</td>
+<td>promtail</td>
+<td>9080</td>
+</tr>
+<tr>
+<td>/cadvisor</td>
+<td>cadvisor</td>
+<td>8080</td>
+</tr>
+</tbody>
+</table>
+<p>We would come back to the rest of the services, let us focus on the application stack, if everything goes well, you should be able to visit your server&rsquo;s IP/hostname and see the frontend application, log in with the credentials in the <code>backend/.env</code> file and voila! you are a seasoned DevOps engineer.</p>
+<p>Some routes may need further configuration especially with handling redirection, so you may need to add some custom Nginx configuration by clicking on the setting icon for the specific location and adding the following</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#66d9ef">location</span> <span style="color:#e6db74">/&lt;location&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">rewrite</span> <span style="color:#e6db74">^/&lt;location&gt;/(.*)</span>$ <span style="color:#e6db74">/</span>$1 <span style="color:#e6db74">break</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">proxy_pass</span> <span style="color:#e6db74">&lt;container-name&gt;:&lt;container-port&gt;/</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">proxy_redirect</span> <span style="color:#e6db74">/</span> <span style="color:#e6db74">/&lt;location&gt;/</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Replace location with the appropriate location you are defining and the corresponding container-name and container-port.
+e.g</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#66d9ef">location</span> <span style="color:#e6db74">/prometheus</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">rewrite</span> <span style="color:#e6db74">^/prometheus/(.*)</span>$ <span style="color:#e6db74">/</span>$1 <span style="color:#e6db74">break</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">proxy_pass</span> <span style="color:#e6db74">http://cv-challenge01-prometheus-1:9090/</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">proxy_redirect</span> <span style="color:#e6db74">/</span> <span style="color:#e6db74">/prometheus/</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This helps fix some common redirection issues, particularly for services like prometheus, and grafana.</p>
+<p>Finally create another proxy host, this time for the <code>adminer</code> service, similar to how we routed all requests from our domain through our proxy-manager container, we would route a subdomain <code>db.&lt;domain&gt;</code> to the adminer container.</p>
+<h2 id="monitoring-and-logging">Monitoring and Logging</h2>
+<p>To setup our monitoring stack, we create a <code>docker-compose.monitoring.yml</code> file to define our services</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>touch docker-compose.monitoring.yml
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">services</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">prometheus</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">prom/prometheus:latest</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">always</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">./prometheus.yml:/etc/prometheus/prometheus.yml:ro</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">command</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;--config.file=/etc/prometheus/prometheus.yml&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">networks</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">app_network</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">grafana</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">grafana/grafana:latest</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">always</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;GF_INSTALL_PLUGINS=https://storage.googleapis.com/integration-artifacts/grafana-lokiexplore-app/grafana-lokiexplore-app-latest.zip;grafana-lokiexplore-app&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">grafana-storage:/var/lib/grafana</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">./grafana.ini:/etc/grafana/grafana.ini:ro</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">networks</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">app_network</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">loki</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">grafana/loki:latest</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">command</span>: -<span style="color:#ae81ff">config.file=/etc/loki/config.yml</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">./loki-config.yml:/etc/loki/config.yml</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">networks</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">app_network</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">promtail</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">grafana/promtail:latest</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">/var/log:/var/log</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">/var/lib/docker/containers:/var/lib/docker/containers:ro</span> <span style="color:#75715e"># FOR WSL2 docker volume see more (https://github.com/vacp2p/wakurtosis/issues/58)</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">./promtail-config.yml:/etc/promtail/config.yml</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">command</span>: <span style="color:#e6db74">&#34;-config.file=/etc/promtail/config.yml&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">networks</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">app_network</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">cadvisor</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">gcr.io/cadvisor/cadvisor:latest</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">/:/rootfs:ro</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">/var/run:/var/run:rw</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">/sys:/sys:ro</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">/var/lib/docker/:/var/lib/docker:ro</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">/dev/disk:/dev/disk:ro</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">networks</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">app_network</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">grafana-storage</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">driver</span>: <span style="color:#ae81ff">local</span>
+</span></span></code></pre></div><p>We also need to setup configuration files for prometheus, grafana, loki and promtail. So create the following files</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>touch prometheus.yml grafana.ini loki-config.yml promtail-config.yml
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#75715e"># prometheus.yml</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">global</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">scrape_interval</span>: <span style="color:#ae81ff">15s</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">evaluation_interval</span>: <span style="color:#ae81ff">15s</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">scrape_configs</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">job_name</span>: <span style="color:#e6db74">&#34;prometheus&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">static_configs</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">targets</span>:
+</span></span><span style="display:flex;"><span>          - <span style="color:#e6db74">&#34;localhost:9090&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">job_name</span>: <span style="color:#e6db74">&#34;loki&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">static_configs</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">targets</span>:
+</span></span><span style="display:flex;"><span>          - <span style="color:#e6db74">&#34;loki:3100&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">job_name</span>: <span style="color:#e6db74">&#34;promtail&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">static_configs</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">targets</span>:
+</span></span><span style="display:flex;"><span>          - <span style="color:#e6db74">&#34;promtail:9080&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">job_name</span>: <span style="color:#ae81ff">cadvisor</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">scrape_interval</span>: <span style="color:#ae81ff">5s</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">static_configs</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">targets</span>:
+</span></span><span style="display:flex;"><span>          - <span style="color:#e6db74">&#34;cadvisor:8080&#34;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ini" data-lang="ini"><span style="display:flex;"><span><span style="color:#75715e"># grafana.ini</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">[server]</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># URL to serve Grafana from, it is important that this matches the URL used by the client.</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">root_url</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">%(protocol)s://%(domain)s:%(http_port)s/grafana/</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#75715e"># loki-config.yml</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">auth_enabled</span>: <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">server</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">http_listen_port</span>: <span style="color:#ae81ff">3100</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">grpc_listen_port</span>: <span style="color:#ae81ff">9096</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">common</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">instance_addr</span>: <span style="color:#ae81ff">127.0.0.1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">path_prefix</span>: <span style="color:#ae81ff">/tmp/loki</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">storage</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">filesystem</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">chunks_directory</span>: <span style="color:#ae81ff">/tmp/loki/chunks</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">rules_directory</span>: <span style="color:#ae81ff">/tmp/loki/rules</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">replication_factor</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ring</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">kvstore</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">store</span>: <span style="color:#ae81ff">inmemory</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">query_range</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">results_cache</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cache</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">embedded_cache</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">max_size_mb</span>: <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">schema_config</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">configs</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">from</span>: <span style="color:#e6db74">2020-10-24</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">store</span>: <span style="color:#ae81ff">tsdb</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">object_store</span>: <span style="color:#ae81ff">filesystem</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">schema</span>: <span style="color:#ae81ff">v13</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">index</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">prefix</span>: <span style="color:#ae81ff">index_</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">period</span>: <span style="color:#ae81ff">24h</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">ruler</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">alertmanager_url</span>: <span style="color:#ae81ff">http://localhost:9093</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># By default, Loki will send anonymous, but uniquely-identifiable usage and configuration</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># analytics to Grafana Labs. These statistics are sent to https://stats.grafana.org/</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Statistics help us better understand how Loki is used, and they show us performance</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># levels for most users. This helps us prioritize features and documentation.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># For more information on what&#39;s sent, look at</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># https://github.com/grafana/loki/blob/main/pkg/analytics/stats.go</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Refer to the buildReport method to see what goes into a report.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># If you would like to disable reporting, uncomment the following lines:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#analytics:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#  reporting_enabled: false</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">pattern_ingester</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">limits_config</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">allow_structured_metadata</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">volume_enabled</span>: <span style="color:#66d9ef">true</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#75715e"># promtail-config.yml</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">server</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">http_listen_port</span>: <span style="color:#ae81ff">9080</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">grpc_listen_port</span>: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">positions</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">filename</span>: <span style="color:#ae81ff">/tmp/positions.yaml</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">clients</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">url</span>: <span style="color:#ae81ff">http://loki:3100/loki/api/v1/push</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">scrape_configs</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">job_name</span>: <span style="color:#ae81ff">system</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">static_configs</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">targets</span>:
+</span></span><span style="display:flex;"><span>          - <span style="color:#ae81ff">localhost</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">job</span>: <span style="color:#ae81ff">varlogs</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">__path__</span>: <span style="color:#ae81ff">/var/log/*log</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">job_name</span>: <span style="color:#ae81ff">containers</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">static_configs</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">targets</span>:
+</span></span><span style="display:flex;"><span>          - <span style="color:#ae81ff">localhost</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">job</span>: <span style="color:#e6db74">&#34;containerlogs&#34;</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">__path__</span>: <span style="color:#ae81ff">/var/lib/docker/containers/*/*.log</span>
+</span></span></code></pre></div><p>Edit the .env file in the root folder like so:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>COMPOSE_FILE<span style="color:#f92672">=</span>docker-compose.app.yml:docker-compose.monitoring.yml
+</span></span></code></pre></div><p>Now we are telling docker-compose to use these two config files to run our containers. We can now run our containers with the command</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker-compose up -d
+</span></span></code></pre></div><p>These should start all our services. If all goes well, you should be able to access the routes defined earlier in the reverse proxy. If any issues confirm the services are up or play around with the proxy manager custom location settings</p>
+<p>Navigate to the <code>/grafana</code> route and login with the credentials <code>admin</code> for both username and password, you will be prompted to change this after logging in.</p>
+<p>Open the menu and navigate to &ldquo;Connections&rdquo; and select &ldquo;Data Sources&rdquo;, add loki and prometheus as data sources,
+once configured with the appropriate URLs, we can proceed to create a dashboard.</p>
+<p>To save time, we can import community made <a href="https://grafana.com/grafana/dashboards/">dashboards</a> like this <a href="https://grafana.com/grafana/dashboards/21361-docker-cadvisor-compute-resources/">one</a> or you can create your own dashboards</p>
+<p><img src="images/grafana-dashboard-cadvisor.png" alt="prometheus cadvisor metrics" title="Grafana Dashboard"></p>
+<p>The dashboard above uses metrics from prometheus exported by cAdvisor to give insights on container resource usage. Similarly you can set up dashboards with your Loki source to stream and visualize log data.</p>
+<p><img src="images/loki-dashboard.png" alt="loki log aggregation" title="Loki Logs Dashboard"></p>
+<p>That&rsquo;s about it for our monitoring stack, right now we have been able to setup our application and monitoring stacks, but we need to deploy this to a VM so it is publicly available.</p>
+<h2 id="cloud-deployment">Cloud Deployment</h2>
+<p>To make our application available to the public, we need a domain name, you can get a free subdomain with <a href="https://freedns.afraid.org/subdomain/">Afraid DNS</a>, we also need our target VM with a public IP address, we can setup an <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html">EC2 server on AWS</a> with docker installed, you can put the script to install docker and add your user to a group in the User Data section before launching the instance, so it runs while the server is being provisioned. Also ensure the following ports are open in the security groups or firewall. Ports 22, 80, 81, 443</p>
+<p>Once that is out of the way and we have our IP address, we should point our domain name to this IP address, then we can go ahead to copy our development files over to our VM using <code>scp</code>. In our project&rsquo;s root folder, copy everything to our VM like so</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>scp -ri <span style="color:#e6db74">&#34;key.pem&#34;</span> . user@hostname:/home/ubuntu
+</span></span></code></pre></div><p>Ensure our docker-compose files were copied over and .env file, then run the docker-compose up command</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker-compose up -d --build
+</span></span></code></pre></div><p>Make sure to set the reverse proxy configuration if you did it on localhost initially, then add SSL to your domain by either getting a free certificate from Let&rsquo;s Encrypt right there in the Nginx Proxy Manager admin interface or add a custom one. Once SSL is set up and routing is working fine, we are done!. 🎊🎊🎊</p>
+<p>To avoid CORS errors when accessing the frontend, update the <code>backend/.env</code> to include your domain name in the <code>BACKEND_CORS_ORIGINS</code> variable.</p>
+<h2 id="wrapping-up">Wrapping Up</h2>
+<p>We have been able to deploy a fullstack application and monitoring tools for our deployment with the help of docker-compose. docker-compose is a simple tool and I am aware that when running production grade apps, there are other preferred industry-standard alternatives like kubernetes, but we have been able to get a taste of what is required to take an app from code to deployment.</p>
+<p>We have learned to use tools like grafana, loki, promtail, prometheus and cadvisor to make our systems observable which is standard industry practice, also learned about reverse proxys and how to manage proxy configurations with a simple tool like nginx proxy manager.</p>
+<p>By combining these tools, we’ve built a solid infrastructure that ensures real-time monitoring of our application&rsquo;s health and performance. This framework enables us to promptly detect and address issues, establishing a reliable base for maintaining and scaling the workloads effectively.</p>
+
+		</section>
+
+		<div class="post-tags">
+			
+			
+			<nav class="nav tags">
+				<ul class="tags">
+					
+					<li><a href="/tags/docker">docker</a></li>
+					
+					<li><a href="/tags/docker-compose">docker-compose</a></li>
+					
+					<li><a href="/tags/devops">devops</a></li>
+					
+					<li><a href="/tags/devopsdojo-cv-challenge">devopsdojo-cv-challenge</a></li>
+					
+				</ul>
+			</nav>
+			
+			
+		</div>
+		</article>
+</main>
+<footer>
+  <div style="display:flex"><a class="soc" href="https://github.com/0xdod/" rel="me" title="GitHub"><i data-feather="github"></i></a>
+    <a class="border"></a><a class="soc" href="https://twitter.com/0xdod/" rel="me" title="Twitter"><i data-feather="twitter"></i></a>
+    <a class="border"></a></div>
+  <div class="footer-info">
+    2024  © Damilola |  <a
+      href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
+  </div>
+</footer>
+<script>
+  feather.replace()
+</script></div>
+    </body>
+</html>

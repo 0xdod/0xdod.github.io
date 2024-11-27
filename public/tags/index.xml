@@ -7,13 +7,34 @@
     <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>© Damilola</copyright>
-    <lastBuildDate>Thu, 08 Aug 2024 02:50:46 +0100</lastBuildDate>
+    <lastBuildDate>Wed, 27 Nov 2024 01:50:50 +0100</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Algorithms</title>
-      <link>http://localhost:1313/tags/algorithms/</link>
-      <pubDate>Thu, 08 Aug 2024 02:50:46 +0100</pubDate>
-      <guid>http://localhost:1313/tags/algorithms/</guid>
+      <title>Devops</title>
+      <link>http://localhost:1313/tags/devops/</link>
+      <pubDate>Wed, 27 Nov 2024 01:50:50 +0100</pubDate>
+      <guid>http://localhost:1313/tags/devops/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Devopsdojo-Cv-Challenge</title>
+      <link>http://localhost:1313/tags/devopsdojo-cv-challenge/</link>
+      <pubDate>Wed, 27 Nov 2024 01:50:50 +0100</pubDate>
+      <guid>http://localhost:1313/tags/devopsdojo-cv-challenge/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Docker</title>
+      <link>http://localhost:1313/tags/docker/</link>
+      <pubDate>Wed, 27 Nov 2024 01:50:50 +0100</pubDate>
+      <guid>http://localhost:1313/tags/docker/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Docker-Compose</title>
+      <link>http://localhost:1313/tags/docker-compose/</link>
+      <pubDate>Wed, 27 Nov 2024 01:50:50 +0100</pubDate>
+      <guid>http://localhost:1313/tags/docker-compose/</guid>
       <description></description>
     </item>
   </channel>

@@ -7,14 +7,14 @@
     <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>© Damilola</copyright>
-    <lastBuildDate>Thu, 08 Aug 2024 02:50:46 +0100</lastBuildDate>
+    <lastBuildDate>Wed, 27 Nov 2024 01:50:50 +0100</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Understanding Algorithm Analysis</title>
-      <link>http://localhost:1313/posts/algorithms/</link>
-      <pubDate>Thu, 08 Aug 2024 02:50:46 +0100</pubDate>
-      <guid>http://localhost:1313/posts/algorithms/</guid>
-      <description>Introduction What is an algorithm Examples of algorithms Why do we need algorithms Why study algorithms Analysis of algorithms Why is it important Motivation Tools of the trade :w</description>
+      <title>Compose Your App: Deploying and Monitoring a Full-Stack App with Modern DevOps Tools.</title>
+      <link>http://localhost:1313/posts/compose-your-apps/</link>
+      <pubDate>Wed, 27 Nov 2024 01:50:50 +0100</pubDate>
+      <guid>http://localhost:1313/posts/compose-your-apps/</guid>
+      <description>Introduction This year I decided to venture into the realm of practical DevOps adventures and I was lucky to stumble upon a set of DevOps challenges spanning 6 weeks, where each week we battle with some unique problem-solving scenarios involving various DevOps tools and technologies. This article is a documentation of my first challenge which is Deploying a containerized application and monitoring stack to the cloud, and configuring a reverse proxy.</description>
     </item>
     <item>
       <title>About</title>
