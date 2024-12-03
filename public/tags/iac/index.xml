@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>IaC on dod</title>
+    <link>http://localhost:1313/tags/iac/</link>
+    <description>Recent content in IaC on dod</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <copyright>© Damilola</copyright>
+    <lastBuildDate>Tue, 03 Dec 2024 15:38:25 +0100</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/iac/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Deploy Destroy Repeat: Automating Deployments with Terraform and Ansible</title>
+      <link>http://localhost:1313/posts/deploy-destroy-repeat/</link>
+      <pubDate>Tue, 03 Dec 2024 15:38:25 +0100</pubDate>
+      <guid>http://localhost:1313/posts/deploy-destroy-repeat/</guid>
+      <description>Automating Infrastructure Deployment and Configuration with Terraform and Ansible</description>
+    </item>
+  </channel>
+</rss>

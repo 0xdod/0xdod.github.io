@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>dod</title>
-    <link>http://localhost:1313/</link>
-    <description>Recent content on dod</description>
+    <title>Devops-Projects-Challenge on dod</title>
+    <link>http://localhost:1313/tags/devops-projects-challenge/</link>
+    <description>Recent content in Devops-Projects-Challenge on dod</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>© Damilola</copyright>
     <lastBuildDate>Tue, 03 Dec 2024 15:38:25 +0100</lastBuildDate>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/devops-projects-challenge/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Deploy Destroy Repeat: Automating Deployments with Terraform and Ansible</title>
       <link>http://localhost:1313/posts/deploy-destroy-repeat/</link>
@@ -22,13 +22,6 @@
       <pubDate>Wed, 27 Nov 2024 01:50:50 +0100</pubDate>
       <guid>http://localhost:1313/posts/compose-your-apps/</guid>
       <description>This year I decided to venture into the realm of practical DevOps adventures and I was lucky to stumble upon a set of DevOps challenges spanning 6 weeks, where each week we battle with some unique problem-solving scenarios involving various DevOps tools and technologies. This article is a documentation of my first challenge which is Deploying a containerized application and monitoring stack to the cloud, and configuring a reverse proxy.</description>
-    </item>
-    <item>
-      <title>About</title>
-      <link>http://localhost:1313/about/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/about/</guid>
-      <description>Hello! I&amp;rsquo;m Damilola&#xA;I work as a software engineer during the day and fight crime in my neighborhood at night 🦇. I have been writing software professionally since 2021, working mostly with Typescript (NestJS) and Go. In recent times, I have been investing my time learning about cloud technologies and DevOps practices, picking up 2 AWS certifications in the process (I&amp;rsquo;m not bragging 😎).&#xA;I also love to read about system architecture, algorithms, blockchain and crypto technologies, and exploring new programming languages (like I&amp;rsquo;m learning Zig just for the plot).</description>
     </item>
   </channel>
 </rss>

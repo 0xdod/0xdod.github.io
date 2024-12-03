@@ -1,14 +1,9 @@
 +++
 title = 'Compose Your App: Deploying and Monitoring a Full-Stack App with Modern DevOps Tools.'
 date = 2024-11-27T01:50:50+01:00
-description = 'An article on deploying and monitoring containerized applications'
 draft = false
-toc = true
-tags = ['docker', 'docker-compose', 'devops', 'devopsdojo-cv-challenge']
-tldr = 'Deploying mutiple containers with docker-compose and setting up monitoring with prometheus, cadvisor, grafana, loki and promtail.'
+tags = ['containers', 'docker', 'devops', 'devops-projects-challenge']
 +++
-
-## Introduction
 
 This year I decided to venture into the realm of practical DevOps adventures and I was lucky to stumble upon a set of DevOps challenges spanning 6 weeks, where each week we battle with some unique problem-solving scenarios involving various DevOps tools and technologies. This article is a documentation of my first challenge which is _Deploying a containerized application and monitoring stack to the cloud, and configuring a reverse proxy._
 
@@ -26,7 +21,7 @@ To achieve this, I had to learn about:
 
 Now let's proceed.
 
-## Dockerization
+## Docker Containers
 
 It might not be obvious, but to "dockerize" our application, we need to have [docker](https://docs.docker.com/get-started/get-docker/) running and use docker-compose to deploy multiple containers, one for each service. The services to be deployed include:
 

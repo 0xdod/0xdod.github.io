@@ -7,20 +7,48 @@
     <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>© Damilola</copyright>
-    <lastBuildDate>Wed, 27 Nov 2024 01:50:50 +0100</lastBuildDate>
+    <lastBuildDate>Tue, 03 Dec 2024 15:38:25 +0100</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ansible</title>
+      <link>http://localhost:1313/tags/ansible/</link>
+      <pubDate>Tue, 03 Dec 2024 15:38:25 +0100</pubDate>
+      <guid>http://localhost:1313/tags/ansible/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Devops</title>
       <link>http://localhost:1313/tags/devops/</link>
-      <pubDate>Wed, 27 Nov 2024 01:50:50 +0100</pubDate>
+      <pubDate>Tue, 03 Dec 2024 15:38:25 +0100</pubDate>
       <guid>http://localhost:1313/tags/devops/</guid>
       <description></description>
     </item>
     <item>
-      <title>Devopsdojo-Cv-Challenge</title>
-      <link>http://localhost:1313/tags/devopsdojo-cv-challenge/</link>
+      <title>Devops-Projects-Challenge</title>
+      <link>http://localhost:1313/tags/devops-projects-challenge/</link>
+      <pubDate>Tue, 03 Dec 2024 15:38:25 +0100</pubDate>
+      <guid>http://localhost:1313/tags/devops-projects-challenge/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>IaC</title>
+      <link>http://localhost:1313/tags/iac/</link>
+      <pubDate>Tue, 03 Dec 2024 15:38:25 +0100</pubDate>
+      <guid>http://localhost:1313/tags/iac/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Terraform</title>
+      <link>http://localhost:1313/tags/terraform/</link>
+      <pubDate>Tue, 03 Dec 2024 15:38:25 +0100</pubDate>
+      <guid>http://localhost:1313/tags/terraform/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Containers</title>
+      <link>http://localhost:1313/tags/containers/</link>
       <pubDate>Wed, 27 Nov 2024 01:50:50 +0100</pubDate>
-      <guid>http://localhost:1313/tags/devopsdojo-cv-challenge/</guid>
+      <guid>http://localhost:1313/tags/containers/</guid>
       <description></description>
     </item>
     <item>
@@ -28,13 +56,6 @@
       <link>http://localhost:1313/tags/docker/</link>
       <pubDate>Wed, 27 Nov 2024 01:50:50 +0100</pubDate>
       <guid>http://localhost:1313/tags/docker/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Docker-Compose</title>
-      <link>http://localhost:1313/tags/docker-compose/</link>
-      <pubDate>Wed, 27 Nov 2024 01:50:50 +0100</pubDate>
-      <guid>http://localhost:1313/tags/docker-compose/</guid>
       <description></description>
     </item>
   </channel>

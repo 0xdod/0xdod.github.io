@@ -2,25 +2,25 @@
 <html><head lang="en"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Compose Your App: Deploying and Monitoring a Full-Stack App with Modern DevOps Tools. - dod</title><meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="An article on deploying and monitoring containerized applications" />
+	<meta name="description" content="This year I decided to venture into the realm of practical DevOps adventures and I was lucky to stumble upon a set of DevOps challenges spanning 6 weeks, where each week we battle with some unique problem-solving scenarios involving various DevOps tools and technologies. This article is a documentation of my first challenge which is Deploying a containerized application and monitoring stack to the cloud, and configuring a reverse proxy." />
 	<meta property="og:image" content=""/>
 	<meta property="og:url" content="http://localhost:1313/posts/compose-your-apps/">
   <meta property="og:site_name" content="dod">
   <meta property="og:title" content="Compose Your App: Deploying and Monitoring a Full-Stack App with Modern DevOps Tools.">
-  <meta property="og:description" content="An article on deploying and monitoring containerized applications">
+  <meta property="og:description" content="This year I decided to venture into the realm of practical DevOps adventures and I was lucky to stumble upon a set of DevOps challenges spanning 6 weeks, where each week we battle with some unique problem-solving scenarios involving various DevOps tools and technologies. This article is a documentation of my first challenge which is Deploying a containerized application and monitoring stack to the cloud, and configuring a reverse proxy.">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2024-11-27T01:50:50+01:00">
     <meta property="article:modified_time" content="2024-11-27T01:50:50+01:00">
+    <meta property="article:tag" content="Containers">
     <meta property="article:tag" content="Docker">
-    <meta property="article:tag" content="Docker-Compose">
     <meta property="article:tag" content="Devops">
-    <meta property="article:tag" content="Devopsdojo-Cv-Challenge">
+    <meta property="article:tag" content="Devops-Projects-Challenge">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Compose Your App: Deploying and Monitoring a Full-Stack App with Modern DevOps Tools.">
-  <meta name="twitter:description" content="An article on deploying and monitoring containerized applications">
+  <meta name="twitter:description" content="This year I decided to venture into the realm of practical DevOps adventures and I was lucky to stumble upon a set of DevOps challenges spanning 6 weeks, where each week we battle with some unique problem-solving scenarios involving various DevOps tools and technologies. This article is a documentation of my first challenge which is Deploying a containerized application and monitoring stack to the cloud, and configuring a reverse proxy.">
 <script src="http://localhost:1313/js/feather.min.js"></script>
 	
 	
@@ -101,29 +101,11 @@
 			<div class="meta">Posted on Nov 27, 2024</div>
 		</div>
 		
-		<div class="tldr">
-			<strong>tl;dr:</strong>
-			Deploying mutiple containers with docker-compose and setting up monitoring with prometheus, cadvisor, grafana, loki and promtail.
-		</div>
 
 		
-		<div class="toc">
-		<strong>Table of contents:</strong>
-		<nav id="TableOfContents">
-  <ul>
-    <li><a href="#introduction">Introduction</a></li>
-    <li><a href="#dockerization">Dockerization</a></li>
-    <li><a href="#reverse-proxy-setup">Reverse Proxy Setup</a></li>
-    <li><a href="#monitoring-and-logging">Monitoring and Logging</a></li>
-    <li><a href="#cloud-deployment">Cloud Deployment</a></li>
-    <li><a href="#wrapping-up">Wrapping Up</a></li>
-  </ul>
-</nav>
-		</div>
 
 		<section class="body">
-			<h2 id="introduction">Introduction</h2>
-<p>This year I decided to venture into the realm of practical DevOps adventures and I was lucky to stumble upon a set of DevOps challenges spanning 6 weeks, where each week we battle with some unique problem-solving scenarios involving various DevOps tools and technologies. This article is a documentation of my first challenge which is <em>Deploying a containerized application and monitoring stack to the cloud, and configuring a reverse proxy.</em></p>
+			<p>This year I decided to venture into the realm of practical DevOps adventures and I was lucky to stumble upon a set of DevOps challenges spanning 6 weeks, where each week we battle with some unique problem-solving scenarios involving various DevOps tools and technologies. This article is a documentation of my first challenge which is <em>Deploying a containerized application and monitoring stack to the cloud, and configuring a reverse proxy.</em></p>
 <p>The goal was to deploy a full-stack application with a React frontend, FastAPI backend and a PostgreSQL database in separate containers with docker-compose, putting all HTTP services behind a reverse proxy and managing configuration for the reverse proxy, collecting logs and container metrics and building a dashboard to visualize them.</p>
 <p>To achieve this, I had to learn about:</p>
 <ul>
@@ -136,7 +118,7 @@
 <li>Deploying to a VM on the cloud with a custom domain.</li>
 </ul>
 <p>Now let&rsquo;s proceed.</p>
-<h2 id="dockerization">Dockerization</h2>
+<h2 id="docker-containers">Docker Containers</h2>
 <p>It might not be obvious, but to &ldquo;dockerize&rdquo; our application, we need to have <a href="https://docs.docker.com/get-started/get-docker/">docker</a> running and use docker-compose to deploy multiple containers, one for each service. The services to be deployed include:</p>
 <ul>
 <li>Frontend service</li>
@@ -533,7 +515,7 @@ once configured with the appropriate URLs, we can proceed to create a dashboard.
 </span></span></code></pre></div><p>Make sure to set the reverse proxy configuration if you did it on localhost initially, then add SSL to your domain by either getting a free certificate from Let&rsquo;s Encrypt right there in the Nginx Proxy Manager admin interface or add a custom one. Once SSL is set up and routing is working fine, we are done!. 🎊🎊🎊</p>
 <p>To avoid CORS errors when accessing the frontend, update the <code>backend/.env</code> to include your domain name in the <code>BACKEND_CORS_ORIGINS</code> variable.</p>
 <h2 id="wrapping-up">Wrapping Up</h2>
-<p>We have been able to deploy a fullstack application and monitoring tools for our deployment with the help of docker-compose. docker-compose is a simple tool and I am aware that when running production grade apps, there are other preferred industry-standard alternatives like kubernetes, but we have been able to get a taste of what is required to take an app from code to deployment.</p>
+<p>We have been able to deploy a fullstack application and monitoring tools for our deployment with the help of docker-compose. docker-compose is a simple tool and I am aware that when running production grade apps, there are other preferred industry-standard alternatives like kubernetes, but we have been able to get a taste of what is required to take an app from code to deployment. You can find my repo with full solution <a href="https://github.com/0xdod/cv-challenge01">here</a></p>
 <p>We have learned to use tools like grafana, loki, promtail, prometheus and cadvisor to make our systems observable which is standard industry practice, also learned about reverse proxys and how to manage proxy configurations with a simple tool like nginx proxy manager.</p>
 <p>By combining these tools, we’ve built a solid infrastructure that ensures real-time monitoring of our application&rsquo;s health and performance. This framework enables us to promptly detect and address issues, establishing a reliable base for maintaining and scaling the workloads effectively.</p>
 
@@ -545,13 +527,13 @@ once configured with the appropriate URLs, we can proceed to create a dashboard.
 			<nav class="nav tags">
 				<ul class="tags">
 					
-					<li><a href="/tags/docker">docker</a></li>
+					<li><a href="/tags/containers">containers</a></li>
 					
-					<li><a href="/tags/docker-compose">docker-compose</a></li>
+					<li><a href="/tags/docker">docker</a></li>
 					
 					<li><a href="/tags/devops">devops</a></li>
 					
-					<li><a href="/tags/devopsdojo-cv-challenge">devopsdojo-cv-challenge</a></li>
+					<li><a href="/tags/devops-projects-challenge">devops-projects-challenge</a></li>
 					
 				</ul>
 			</nav>
