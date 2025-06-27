@@ -1,8 +1,8 @@
 +++
-title = 'Compose Your App: Deploying and Monitoring a Full-Stack App with Modern DevOps Tools.'
+title = 'Deploying and Monitoring a Full-Stack App with Modern DevOps Tools.'
 date = 2024-11-27T01:50:50+01:00
-draft = false
-tags = ['containers', 'docker', 'devops', 'devops-projects-challenge']
+draft = true
+tags = ['devops', 'docker']
 +++
 
 This year I decided to venture into the realm of practical DevOps adventures and I was lucky to stumble upon a set of DevOps challenges spanning 6 weeks, where each week we battle with some unique problem-solving scenarios involving various DevOps tools and technologies. This article is a documentation of my first challenge which is _Deploying a containerized application and monitoring stack to the cloud, and configuring a reverse proxy._

@@ -1,8 +1,8 @@
 +++
-title = 'Deploy Destroy Repeat: Automating Deployments with Terraform and Ansible'
+title = 'Automating Deployments with Terraform and Ansible'
 date = 2024-12-03T15:38:25+01:00
-draft = false
-tags = ['terraform', 'ansible', 'IaC', 'devops', 'devops-projects-challenge']
+draft = true
+tags = ['devops', 'terraform', 'ansible', 'automation']
 +++
 
 It is week 2 of my devops project challenges and the challenge of the week was to automate the deployment and configuration of the [previous](/posts/compose-your-apps) week's challenge. It feels like the next step in the DevOps process, you have been able to package your applications, but you still need to setup infrastructure and many times repeatedly, doing this manually is not only tedious and time consuming but can lead to inconsistencies in the running environments for your applications, more importantly, it doesn't scale.
