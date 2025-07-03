@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><?xml-stylesheet href="/feed_style.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="https://www.rssboard.org/media-rss">
+  <channel>
+    <title>Tags on Acme of foolishness</title>
+    <link>http://localhost:1313/tags/</link>
+    <description>Recent content in Tags on Acme of foolishness</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>Damilola</copyright>
+    <lastBuildDate>Wed, 02 Jul 2025 19:13:52 +0100</lastBuildDate><atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" /><icon>http://localhost:1313/logo.svg</icon>
+    
+    
+    <item>
+      <title>Devops</title>
+      <link>http://localhost:1313/tags/devops/</link>
+      <pubDate>Wed, 02 Jul 2025 19:13:52 +0100</pubDate>
+      
+      <guid>http://localhost:1313/tags/devops/</guid>
+      <description><![CDATA[]]></description>
+      
+    </item>
+    
+    
+    
+    <item>
+      <title>Kubernetes</title>
+      <link>http://localhost:1313/tags/kubernetes/</link>
+      <pubDate>Wed, 02 Jul 2025 19:13:52 +0100</pubDate>
+      
+      <guid>http://localhost:1313/tags/kubernetes/</guid>
+      <description><![CDATA[]]></description>
+      
+    </item>
+    
+    
+    
+    <item>
+      <title>Ansible</title>
+      <link>http://localhost:1313/tags/ansible/</link>
+      <pubDate>Tue, 03 Dec 2024 15:38:25 +0100</pubDate>
+      
+      <guid>http://localhost:1313/tags/ansible/</guid>
+      <description><![CDATA[]]></description>
+      
+    </item>
+    
+    
+    
+    <item>
+      <title>Automation</title>
+      <link>http://localhost:1313/tags/automation/</link>
+      <pubDate>Tue, 03 Dec 2024 15:38:25 +0100</pubDate>
+      
+      <guid>http://localhost:1313/tags/automation/</guid>
+      <description><![CDATA[]]></description>
+      
+    </item>
+    
+    
+    
+    <item>
+      <title>Terraform</title>
+      <link>http://localhost:1313/tags/terraform/</link>
+      <pubDate>Tue, 03 Dec 2024 15:38:25 +0100</pubDate>
+      
+      <guid>http://localhost:1313/tags/terraform/</guid>
+      <description><![CDATA[]]></description>
+      
+    </item>
+    
+    
+    
+    <item>
+      <title>Docker</title>
+      <link>http://localhost:1313/tags/docker/</link>
+      <pubDate>Wed, 27 Nov 2024 01:50:50 +0100</pubDate>
+      
+      <guid>http://localhost:1313/tags/docker/</guid>
+      <description><![CDATA[]]></description>
+      
+    </item>
+    
+    
+  </channel>
+</rss>

@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html class="" lang="en"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    
+    <meta name="robots" content="noai, noimageai">
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+
+    <link
+    rel="icon"
+    href='/favicon.png'
+/>
+<link
+    rel="shortcut icon"
+    href='/favicon.ico'
+    type="image/x-icon"
+/>
+<link
+    rel="apple-touch-icon"
+    href='/apple-touch-icon.png'
+/>
+
+    <link
+        rel="icon"
+        href='/logo.svg'
+        type="image/svg+xml"
+    />
+
+<title>
+        
+            Deploying a Jenkins Server to a Kubernetes Cluster  &ndash;
+        
+        Acme of foolishness
+    </title>
+
+    
+    <link href="/symbols-nerd-font/symbols-nerd-font.css" rel="stylesheet" />
+    <link href="/jetbrains-mono/jetbrains-mono.css" rel="stylesheet" />
+
+    
+        <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+    
+    
+    <link type="text/css" rel="stylesheet" href=http://localhost:1313/css/styles.abbd6311bb4b6ca58f8e7398140529245ae0f6428b759fcd830742eee2619eabb900ba9914a9affb82aa9a16a9b9ea727bb315315a976a0db0e7513a5f12c504.css integrity="sha512-q71jEbtLbKWPjnOYFAUpJFrg9kKLdZ/NgwdC7uJhnqu5ALqZFKmv&#43;4Kqmhapuepye7MVMVqXag2w51E6XxLFBA==" />
+<meta name="author" content="Damilola Dolor" />
+
+    
+        <meta name="keywords" content='devops, kubernetes' />
+    
+    
+        <meta name="description" content="Part 2 of the &lt;strong&gt;10 Kubernetes Projects in 10 Weeks&lt;/strong&gt; challenge&lt;/em&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Welcome to the second project in my Kubernetes challenge! This time, we&amp;rsquo;re deploying &lt;strong&gt;Jenkins&lt;/strong&gt;—a powerful CI/CD automation server—on a &lt;strong&gt;Minikube Kubernetes cluster&lt;/strong&gt;, and we’ll focus on one crucial aspect: &lt;strong&gt;persistent storage&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Stateful apps like Jenkins need to store data across pod restarts—like pipeline configurations, plugins, and credentials. We&amp;rsquo;ll achieve that using &lt;strong&gt;Persistent Volumes (PV)&lt;/strong&gt; and &lt;strong&gt;Persistent Volume Claims (PVC)&lt;/strong&gt; in Kubernetes.&lt;/p&gt;" />
+    
+
+<meta property="og:site_name"
+    content='Acme of foolishness' />
+
+    <meta property="og:title" content="Deploying a Jenkins Server to a Kubernetes Cluster" />
+    <meta property="og:type" content="article" />
+    
+    <meta
+        property="article:author" content="Damilola Dolor" />
+    
+    <meta
+        name="fediverse:creator" content="@username@instance.com" />
+    
+    <meta
+        property="article:published_time"
+        content='2025-07-03T19:13:52Z&#43;0100' />
+    
+        
+            <meta property="article:tag" content="devops" />
+        
+            <meta property="article:tag" content="kubernetes" />
+        
+    
+    <meta property="og:url" content="http://localhost:1313/posts/kubernetes/deploying-a-jenkins-server-to-a-kubernetes-cluster/" />
+    
+    
+    <meta property="og:image"
+        content="http://localhost:1313/icon512.png" />
+    
+        <meta property="og:description" content="&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Part 2 of the &lt;strong&gt;10 Kubernetes Projects in 10 Weeks&lt;/strong&gt; challenge&lt;/em&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Welcome to the second project in my Kub" />
+    
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:domain"
+      content='localhost:1313'
+/>
+<meta property="twitter:url" content="http://localhost:1313/posts/kubernetes/deploying-a-jenkins-server-to-a-kubernetes-cluster/" />
+
+
+    <meta name="twitter:title" content="Deploying a Jenkins Server to a Kubernetes Cluster" />
+    
+    
+    
+    <meta name="twitter:image"
+        content="http://localhost:1313/icon512.png" />
+    
+        <meta name="twitter:description" content="&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Part 2 of the &lt;strong&gt;10 Kubernetes Projects in 10 Weeks&lt;/strong&gt; challenge&lt;/em&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Welcome to the second project in my Kub" />
+    
+
+<link rel="manifest" href="/manifest/index.json" />
+</head>
+
+
+<body>
+        <div id="baseContainer"><header class="">
+<div class="titleAndSearchContainer">
+        <div id="titleContainer">
+            
+                <a class="unstyledLink" href="/">
+                    <img src='/logo.svg' alt='Logo'/>
+                </a>
+            
+            <div class="rightOfLogo">
+                <div class="titleAndHamburger">
+                    <h1>
+                        <a class="unstyledLink" href="/">Acme of foolishness</a>
+                        
+                    </h1>
+                    
+                </div>
+                <div id="wide_nav"><nav>
+    
+    <ul id="main-nav">
+        <li><a href="/">Home</a></li>
+        
+            <li><a href="/posts/">Posts</a></li>
+        
+        
+        
+        
+        
+        
+            <li><a href="/about/">About</a></li>
+        
+        
+            <li><a href="/tags/">Tags</a></li>
+        
+        
+    </ul>
+</nav>
+</div>
+            </div>
+        </div>
+        <div class="search">
+    <input id="searchbar" type="text" placeholder='Search' />
+    <span class="nerdlink" onclick="newSearch();">&#xf002;</span>
+</div>
+<script>
+    function newSearch() {
+        let term = searchbar.value.trim();
+        if (!term) return;
+        location.href = `/search/?q=${term}`;
+    }
+    searchbar.onkeyup = (ev) => {if (ev.keyCode == 13) newSearch()};
+</script>
+
+    </div>
+    <div id="links">
+        <a
+    
+        rel="noreferrer"
+    
+    target="_blank"
+    class="nerdlink"
+    href="/index.xml">
+    
+    
+        &#xf09e;
+    
+    <span>
+        RSS
+    </span>
+</a>
+
+        
+        <a
+    
+        rel="noreferrer"
+    
+    target="_blank"
+    class="nerdlink"
+    href="https://github.com/0xdod">
+    
+    
+        &#xf09b;
+    
+    <span>
+        Github
+    </span>
+</a>
+<a
+    
+        rel="noreferrer"
+    
+    target="_blank"
+    class="nerdlink"
+    href="https://twitter.com/0xdod">
+    
+    
+        &#xf099;
+    
+    <span>
+        Twitter
+    </span>
+</a>
+
+    </div>
+    
+
+</header>
+<div id="contentContainer">
+                <div id="content">
+                    <main>
+<article class="card single">
+    
+        <h1>Deploying a Jenkins Server to a Kubernetes Cluster</h1>
+    
+    
+        <p class="date">
+            <span title='Date'>󰃭 </span>
+    2025-07-03
+
+
+        </p>
+    
+    
+    
+    
+    <div><blockquote>
+<p><em>Part 2 of the <strong>10 Kubernetes Projects in 10 Weeks</strong> challenge</em></p></blockquote>
+<p>Welcome to the second project in my Kubernetes challenge! This time, we&rsquo;re deploying <strong>Jenkins</strong>—a powerful CI/CD automation server—on a <strong>Minikube Kubernetes cluster</strong>, and we’ll focus on one crucial aspect: <strong>persistent storage</strong>.</p>
+<p>Stateful apps like Jenkins need to store data across pod restarts—like pipeline configurations, plugins, and credentials. We&rsquo;ll achieve that using <strong>Persistent Volumes (PV)</strong> and <strong>Persistent Volume Claims (PVC)</strong> in Kubernetes.</p>
+<p>Let’s dive in! 🏊‍♂️</p>
+<hr>
+<h2 id="-what-youll-learn">🧠 What You&rsquo;ll Learn</h2>
+<ul>
+<li>How to deploy Jenkins in a Kubernetes cluster using Minikube</li>
+<li>How to configure Persistent Volumes and Persistent Volume Claims</li>
+<li>Why persistence is essential for stateful applications like Jenkins</li>
+</ul>
+<hr>
+<h2 id="-prerequisites">📦 Prerequisites</h2>
+<p>Before you start, make sure you have the following installed:</p>
+<ul>
+<li>✅ <a href="https://minikube.sigs.k8s.io/docs/start/">Minikube</a></li>
+<li>✅ <a href="https://kubernetes.io/docs/tasks/tools/">kubectl</a></li>
+<li>✅ <a href="https://helm.sh/docs/intro/install/">Helm</a> (optional, but makes things easier)</li>
+<li>✅ Basic familiarity with Kubernetes concepts (Pods, Services, PVCs)</li>
+</ul>
+<hr>
+<h2 id="why-persistent-storage-for-jenkins">Why Persistent Storage for Jenkins?</h2>
+<p>Jenkins is a continuous integration/continuous delivery (CI/CD) automation server. It stores a lot of critical data:</p>
+<ul>
+<li>
+<p><strong>Build history:</strong> Logs, artifacts, and results of past builds.</p>
+</li>
+<li>
+<p><strong>Configuration:</strong> Job definitions, plugin settings, user credentials.</p>
+</li>
+<li>
+<p><strong>Plugins:</strong> Installed and configured plugins.</p>
+</li>
+<li>
+<p><strong>Workspaces:</strong> Temporary data used during builds.</p>
+</li>
+</ul>
+<p>Without persistent storage, if a Jenkins pod restarts (due to an update, node failure, or scaling event), all this data would be lost, effectively resetting your Jenkins instance. This is where PVs and PVCs come into play.</p>
+<h2 id="understanding-persistent-volumes-pvs">Understanding Persistent Volumes (PVs)</h2>
+<p>Think of a <strong>Persistent Volume (PV)</strong> as a piece of storage in your cluster that has been provisioned by an administrator (or dynamically by a storage provisioner). It&rsquo;s a cluster-wide resource, independent of any specific pod.</p>
+<p>A PV abstracts the underlying storage infrastructure. It could be:</p>
+<ul>
+<li>
+<p>NFS (Network File System) share</p>
+</li>
+<li>
+<p>iSCSI</p>
+</li>
+<li>
+<p>Cloud-specific storage (AWS EBS, Google Persistent Disk, Azure Disk)</p>
+</li>
+<li>
+<p>Local storage (as we&rsquo;ll use in Minikube for demonstration)</p>
+</li>
+</ul>
+<p>Key characteristics of a PV include:</p>
+<ul>
+<li>
+<p><strong>Capacity:</strong> How much storage it provides (e.g., 5Gi).</p>
+</li>
+<li>
+<p><strong>Access Modes:</strong> How the storage can be mounted (e.g., <code>ReadWriteOnce</code> for single-node access, <code>ReadOnlyMany</code> for multiple read-only consumers, <code>ReadWriteMany</code> for multiple read-write consumers).</p>
+</li>
+<li>
+<p><strong>Reclaim Policy:</strong> What happens to the volume when the PVC using it is deleted (e.g., <code>Retain</code>, <code>Recycle</code>, <code>Delete</code>).</p>
+</li>
+</ul>
+<h2 id="understanding-persistent-volume-claims-pvcs">Understanding Persistent Volume Claims (PVCs)</h2>
+<p>While a PV is the actual storage resource, a <strong>Persistent Volume Claim (PVC)</strong> is a request for storage by a user or an application. It&rsquo;s like a consumer requesting a specific type and amount of storage.</p>
+<p>A PVC specifies:</p>
+<ul>
+<li>
+<p><strong>Amount of storage:</strong> How much space is needed.</p>
+</li>
+<li>
+<p><strong>Access modes:</strong> The desired way to access the storage.</p>
+</li>
+<li>
+<p><strong>Storage Class (optional but recommended):</strong> A way to describe &ldquo;classes&rdquo; of storage (e.g., &ldquo;fast-ssd&rdquo;, &ldquo;backup-hdd&rdquo;).</p>
+</li>
+</ul>
+<p>Kubernetes then tries to find a suitable PV that matches the PVC&rsquo;s requirements. Once a PV is found and bound to a PVC, that PV is exclusively reserved for that PVC.</p>
+<p><strong>Analogy:</strong> A PV is like an empty apartment building (the physical storage). A PVC is like a tenant requesting an apartment with specific features (size, number of rooms). Kubernetes then assigns an available apartment (PV) that matches the tenant&rsquo;s request (PVC).</p>
+<h2 id="minikube-setup-briefly">Minikube Setup (Briefly)</h2>
+<p>For this project, we&rsquo;ll use Minikube, a tool that runs a single-node Kubernetes cluster locally. Minikube makes it easy to experiment with Kubernetes features without needing a full-blown cluster. It also supports local persistent volumes, which is perfect for our demonstration.</p>
+<p>Ensure your Minikube cluster is running: <code>minikube start</code></p>
+<h2 id="deploying-jenkins-with-pvpvc">Deploying Jenkins with PV/PVC</h2>
+<p>Let&rsquo;s define our Kubernetes resources. We&rsquo;ll create three YAML files: one for the PV, one for the PVC, and one for the Jenkins Deployment and Service.</p>
+<h3 id="1-persistent-volume-pv-definition-jenkins-pvyaml">1. Persistent Volume (PV) Definition (<code>jenkins-pv.yaml</code>)</h3>
+<p>This PV will use Minikube&rsquo;s host path, meaning it will store data directly on the Minikube VM&rsquo;s filesystem. This is suitable for local testing but not for production.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">PersistentVolume</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">jenkins-pv</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">type</span>: <span style="color:#ae81ff">local</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">storageClassName</span>: <span style="color:#ae81ff">manual</span> <span style="color:#75715e"># We&#39;ll manually bind this PV</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">capacity</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">storage</span>: <span style="color:#ae81ff">5Gi</span> <span style="color:#75715e"># 5 Gigabytes of storage</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">accessModes</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">ReadWriteOnce</span> <span style="color:#75715e"># Can be mounted as read-write by a single node</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">hostPath</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">path</span>: <span style="color:#e6db74">&#34;/mnt/data/jenkins-volume&#34;</span> <span style="color:#75715e"># Path inside the Minikube VM</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">persistentVolumeReclaimPolicy</span>: <span style="color:#ae81ff">Retain</span> <span style="color:#75715e"># Keep the data even if PVC is deletedu</span>
+</span></span></code></pre></div><p><strong>Explanation:</strong></p>
+<ul>
+<li>
+<p><code>storageClassName: manual</code>: We&rsquo;re explicitly defining a storage class name. This allows us to bind a PVC to this specific PV.</p>
+</li>
+<li>
+<p><code>capacity: storage: 5Gi</code>: We are provisioning 5 Gigabytes of storage.</p>
+</li>
+<li>
+<p><code>accessModes: ReadWriteOnce</code>: This PV can be mounted by one node in read-write mode.</p>
+</li>
+<li>
+<p><code>hostPath: path: &quot;/mnt/data/jenkins-volume&quot;</code>: This tells Minikube to create a directory at this path inside its VM to store the data.</p>
+</li>
+<li>
+<p><code>persistentVolumeReclaimPolicy: Retain</code>: If the PVC using this PV is deleted, the PV and its data will remain. This is a safe choice for important data.</p>
+</li>
+</ul>
+<h3 id="2-persistent-volume-claim-pvc-definition-jenkins-pvcyaml">2. Persistent Volume Claim (PVC) Definition (<code>jenkins-pvc.yaml</code>)</h3>
+<p>This PVC will request 5Gi of storage with <code>ReadWriteOnce</code> access, matching our PV.</p>
+<pre tabindex="0"><code>apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jenkins-pvc
+spec:
+  storageClassName: manual # Must match the PV&#39;s storageClassName
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi # Requesting 5 Gigabytes
+</code></pre><p><strong>Explanation:</strong></p>
+<ul>
+<li>
+<p><code>storageClassName: manual</code>: This PVC will look for a PV with the <code>manual</code> storage class.</p>
+</li>
+<li>
+<p><code>accessModes: ReadWriteOnce</code>: It requests the ability to be mounted read-write by a single node.</p>
+</li>
+<li>
+<p><code>resources: requests: storage: 5Gi</code>: It requests 5 Gigabytes of storage.</p>
+</li>
+</ul>
+<h3 id="3-jenkins-deployment-and-service-jenkins-deploymentyaml">3. Jenkins Deployment and Service (<code>jenkins-deployment.yaml</code>)</h3>
+<p>This defines our Jenkins deployment, which will use the PVC, and a Service to expose Jenkins.</p>
+<pre tabindex="0"><code>apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins-deployment
+  labels:
+    app: jenkins
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jenkins
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      containers:
+        - name: jenkins
+          image: jenkins/jenkins:lts # Using the Long Term Support Jenkins image
+          ports:
+            - name: http-port
+              containerPort: 8080
+            - name: jnlp-port
+              containerPort: 50000
+          volumeMounts:
+            - name: jenkins-home
+              mountPath: /var/jenkins_home # Jenkins stores its data here
+          livenessProbe: # Health check to ensure Jenkins is running
+            httpGet:
+              path: &#34;/login&#34;
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 5
+          readinessProbe: # Readiness check before sending traffic
+            httpGet:
+              path: &#34;/login&#34;
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 5
+      volumes:
+        - name: jenkins-home
+          persistentVolumeClaim:
+            claimName: jenkins-pvc # Referencing our PVC
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins-service
+spec:
+  selector:
+    app: jenkins
+  type: NodePort # Expose Jenkins via a NodePort
+  ports:
+    - port: 8080
+      targetPort: 8080
+      nodePort: 30000 # Access Jenkins on your host at port 30000
+      name: http
+    - port: 50000
+      targetPort: 50000
+      name: jnlp # For Jenkins agents
+</code></pre><p><strong>Explanation:</strong></p>
+<ul>
+<li>
+<p><strong>Deployment:</strong></p>
+<ul>
+<li>
+<p><code>image: jenkins/jenkins:lts</code>: Specifies the Jenkins Docker image.</p>
+</li>
+<li>
+<p><code>volumeMounts</code>: This section mounts the <code>jenkins-home</code> volume at <code>/var/jenkins_home</code> inside the container, which is where Jenkins expects its data to be.</p>
+</li>
+<li>
+<p><code>volumes</code>: This section defines the <code>jenkins-home</code> volume and links it to our <code>jenkins-pvc</code> using <code>persistentVolumeClaim: claimName: jenkins-pvc</code>.</p>
+</li>
+<li>
+<p><code>livenessProbe</code> and <code>readinessProbe</code>: These ensure Kubernetes knows when Jenkins is healthy and ready to receive traffic.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Service:</strong></p>
+<ul>
+<li>
+<p><code>type: NodePort</code>: Exposes the Jenkins service on a static port on each node&rsquo;s IP. Minikube will make this accessible from your host machine.</p>
+</li>
+<li>
+<p><code>nodePort: 30000</code>: We&rsquo;ve chosen <code>30000</code> for easy access.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="steps-to-deploy">Steps to Deploy</h2>
+<ol>
+<li>
+<p><strong>Save the YAML files:</strong> Save the content above into <code>jenkins-pv.yaml</code>, <code>jenkins-pvc.yaml</code>, and <code>jenkins-deployment.yaml</code> respectively.</p>
+</li>
+<li>
+<p><strong>Apply the PV:</strong></p>
+<pre tabindex="0"><code>kubectl apply -f jenkins-pv.yaml
+</code></pre><p>Verify it&rsquo;s created and available:</p>
+<pre tabindex="0"><code>kubectl get pv
+</code></pre><p>You should see <code>jenkins-pv</code> with status <code>Available</code>.</p>
+</li>
+<li>
+<p><strong>Apply the PVC:</strong></p>
+<pre tabindex="0"><code>kubectl apply -f jenkins-pvc.yaml
+</code></pre><p>Verify it&rsquo;s created and bound:</p>
+<pre tabindex="0"><code>kubectl get pvc
+</code></pre><p>You should see <code>jenkins-pvc</code> with status <code>Bound</code> to <code>jenkins-pv</code>.</p>
+</li>
+<li>
+<p><strong>Apply the Jenkins Deployment and Service:</strong></p>
+<pre tabindex="0"><code>kubectl apply -f jenkins-deployment.yaml
+</code></pre><p>Monitor the deployment:</p>
+<pre tabindex="0"><code>kubectl get pods -l app=jenkins -w
+</code></pre><p>Wait until the Jenkins pod is <code>Running</code> and <code>Ready</code>. This might take a few minutes as Jenkins downloads plugins and initializes.</p>
+</li>
+</ol>
+<h2 id="verification">Verification</h2>
+<p>Once the Jenkins pod is running, you can access it:</p>
+<ol>
+<li>
+<p><strong>Get the Minikube IP:</strong></p>
+<pre tabindex="0"><code>minikube ip
+</code></pre></li>
+<li>
+<p><strong>Access Jenkins:</strong> Open your web browser and navigate to <code>http://&lt;minikube-ip&gt;:30000</code>.</p>
+</li>
+</ol>
+<p>You should see the Jenkins setup wizard. Go through the initial setup (you can find the initial admin password by checking the pod logs: <code>kubectl logs &lt;jenkins-pod-name&gt;</code>).</p>
+<p><strong>To test persistence:</strong></p>
+<ol>
+<li>
+<p>Complete the Jenkins setup, create a sample job, or install a plugin.</p>
+</li>
+<li>
+<p>Delete the Jenkins pod:</p>
+<pre tabindex="0"><code>kubectl delete pod -l app=jenkins
+</code></pre><p>Kubernetes will automatically create a new pod for the deployment.</p>
+</li>
+<li>
+<p>Once the new pod is running, refresh your browser. You should find your Jenkins instance exactly as you left it, with all your configurations, jobs, or installed plugins intact. This confirms that the persistent storage is working!</p>
+</li>
+</ol>
+<h2 id="conclusion">Conclusion</h2>
+<p>This week, we successfully deployed a Jenkins server on Minikube, demonstrating the critical role of Persistent Volumes (PVs) and Persistent Volume Claims (PVCs) in managing stateful applications in Kubernetes. You&rsquo;ve learned:</p>
+<ul>
+<li>
+<p>Why persistent storage is essential for applications like Jenkins.</p>
+</li>
+<li>
+<p>The distinction between a cluster-wide PV (the actual storage) and a user-requested PVC (the claim for storage).</p>
+</li>
+<li>
+<p>How to define and link PVs and PVCs in your Kubernetes manifests.</p>
+</li>
+<li>
+<p>How to configure a Deployment to use a PVC for its data.</p>
+</li>
+</ul>
+<p>This foundational understanding of persistent storage is vital as you continue your Kubernetes journey. Next week, we&rsquo;ll explore another exciting aspect of Kubernetes!</p>
+</div>
+</article>
+
+    <hr />
+    <p class="articleTagsContainer">
+        <span> </span>
+        <strong>Tags:</strong>
+        
+            <a
+                
+                href="/tags/devops/">#devops</a>
+        
+            <a
+                
+                href="/tags/kubernetes/">#kubernetes</a>
+        
+    </p>
+
+
+
+    <script
+        defer
+        src="https://example.com/js/commento.js"
+        data-no-fonts="true"
+    ></script>
+    <div id="commento"></div>
+
+
+<script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
+
+<div id="ficurinia-cactus-comments"></div>
+
+<script>
+initComments({
+    node: document.getElementById("ficurinia-cactus-comments"),
+    defaultHomeserverUrl: 'https:\/\/matrix.cactus.chat:8448',
+    serverName: 'cactus.chat',
+    siteName: "example.com",
+    commentSectionId: "bf42270e5e5f87578158f8e932301f03"
+})
+</script>
+
+
+
+                    </main><footer>
+    <hr />
+
+<p><small>
+        2025 &copy; Damilola
+    </small></p>
+    <p><small>
+        <a href='https://gitlab.com/gabmus/hugo-ficurinia'>Ficurinia theme</a> for <a href='https://gohugo.io'>Hugo</a> by <a href='https://gabmus.org'>Gabriele Musco</a>. Licensed under <a href='https://www.gnu.org/licenses/agpl-3.0.html'>GNU AGPLv3</a>.
+    </small></p>
+</footer>
+</div>
+            </div>
+        </div>
+    
+        <script
+            async
+            defer
+            data-domain="example.com"
+            src="https://something.com/..."
+        ></script>
+    
+
+
+    
+        <script
+            async
+            defer
+            data-website-id="example-tracking-code"
+            src="https://something.com/..."
+        ></script>
+    
+
+
+</body>
+</html>
