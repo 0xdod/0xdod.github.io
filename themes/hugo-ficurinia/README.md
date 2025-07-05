@@ -1,22 +1,43 @@
-baseURL = "https://0xdod.github.io/"
+![logo](static/logo.svg)
+
+# Ficurinia
+
+A prickly blog theme for Hugo
+
+![](images/tn.png)
+
+# [Demo](https://gabmus.org)
+
+[Code for the demo website](https://gitlab.com/gabmus/gabmus.gitlab.io) (really my personal website)
+
+[Screenshot gallery](https://gabmus.gitlab.io/hugo-ficurinia-screenshots/) showcasing 256 of the possible configurations that Ficurinia offers.
+
+# Customization
+
+## Configuration
+
+These are some parameters you can use in your `config.toml` to customize Ficurinia:
+
+```toml
+baseURL = "https://example.com/"
 theme = "hugo-ficurinia"
-title = "Damilola Dolor"
+title = "My nice blog"
 languageCode = "en"
 defaultContentLanguage = "en"
 
 # this will be included in the footer after the current year the site is last
 # built, followed by the (c) symbol
 # you can use markdown inside this field
-copyright = "Damilola"
+copyright = "Some copyright notice - [my license](https://example.com/license)"
 
-summaryLength = 50  # number of words for article summaries
+summaryLength = 70  # number of words for article summaries
 
 [pagination]
     pagerSize = 5  # number of articles per page in the index
 
 [params]
-    author = "Damilola Dolor"
-    description = ""  # this will be added as metadata
+    author = "Gabriele Musco"
+    description = "A description for my website"  # this will be added as metadata
 
     posts = "posts"  # content directory where to find home page posts; default searches in "posts" and "post"
     showPostsLink = true  # show or hide the link to the simple post list
@@ -139,18 +160,172 @@ summaryLength = 50  # number of words for article summaries
         weight = 10
     # these links (menu.icons) will be added as icon links below the main nav
     [[menu.icons]]
-        identifier = "github"
-        name = "Github"
-        url = "https://github.com/0xdod"
+        identifier = "gitlab"
+        name = "GitLab"
+        url = "https://gitlab.com/gabmus"
         weight = 10
     [[menu.icons]]
-        identifier = "twitter"
-        name = "Twitter"
-        url = "https://twitter.com/0xdod"
+        identifier = "gnome"
+        name = "GNOME GitLab"
+        url = "https://gitlab.gnome.org/gabmus"
         weight = 20
 
 # this section is necessary if you want infinite scrolling
 # it allows to output the article list as paged JSON so that "pages" can be retrieved via javascript
 [outputs]
     home = ["HTML", "JSON"]
+```
 
+### Supported icons
+
+For the `[[menu.icons]]` menu. They match identifier, name and url can be whatever. Here's a list of supported identifiers:
+
+- discord
+- email
+- facebook
+- github
+- gitlab
+- gnome
+- instagram
+- linkedin
+- mastodon
+- matrix
+- peertube
+- phone
+- pleroma
+- rss
+- steam
+- telegram
+- twitter
+- xmpp
+- youtube
+
+## Colors
+
+Colors are completely customizable. They are defined in [`data/colors.yml`](data/colors.yml). Just copy that file over to `yoursite/data/colors.yml` and customize it to your liking.
+
+## Footer columns
+
+You can add various columns of links in the footer using the `data/footer_columns.yml` file.
+
+Following is an example configuration:
+
+```yaml
+- title: My other projects
+  links:
+    - title: HydraPaper
+      link: https://hydrapaper.gabmus.org
+    - title: Ada UI
+      link: https://gitlab.com/gabmus/ada-ui
+- title: About me
+  links:
+    - title: My personal website
+      link: https://gabmus.org
+    - title: My GitLab
+      link: https://gitlab.com/gabmus
+    - title: My GNOME GitLab
+      link: https://gitlab.gnome.org/gabmus
+```
+
+## Jumbotron
+
+You can add a jumbotron at the beginning of the home page using the `data/jumbotron.yml` file.
+
+Following is an example configuration:
+
+```yaml
+title: My awesome website
+hugeTitle: false
+subtitle: Some fancy subtitle
+image: /jumbotron_image.svg
+imagePosition: left  # values: left, right, top, bottom
+background: /img/jumbotron_bg.png
+backgroundVideo: /jumbotron_video.mp4  # will replace the background image
+# it's best to provide both an mp4 and a web source for the video for better compatibility
+backgroundVideoMp4: /jumbotron_video.mp4
+backgroundVideoWebm: /jumbotron_video.webm
+videoOpacity: 1.0
+textShadow: false
+fullscreen: false
+downArrow: false
+whiteText: false  # force white text in the jumbotron
+links:
+  - title: About me
+    link: /pages/about
+  - title: Read my blog
+    link: /posts
+```
+
+# Post parameters
+
+Every post can have various parameters in the frontmatter, here are some that you may find useful
+
+- `title`: the title of the article
+- `date`: usually automatically populated, holds the date and time of the post creation
+- `lastmod`: if set, will display alongside the original date to signify when the post
+  was last updated
+- `description`: a brief description of the post, useful for SEO optimization
+- `tags`: an array of tags, useful for searching similar articles
+- `image`: a link to a feature image for the article, shown in the preview as well
+- `alt`: alternative text to be shown if image is not available or fails to download
+- `imageCaption`: a markdown text rendered as a caption for the article image described above
+- `featured`: boolean, indicate if the post should be shown as featured
+- `comments`: boolean, if true it enables comments for the current post, if false it disables them (default is true)
+- `showDate`: boolean, true by default, if false hides the date. Useful for non-article pages where the date isn't important
+- `showTitle`: boolean, true by default, if false hides the title.
+- `showShare`: boolean, true by default, if false hides the share button.
+- `norss`: boolean, if set to true the page will be skipped in the rss feed
+- `nosearch`: boolean, if set to true the page won't show up in searches
+- `toc`: boolean, if set to true a table of contents will be shown for the article
+
+## Table of contents settings
+
+You can tweak the TOC settings in your `config.toml`:
+
+```toml
+[markup]
+  [markup.tableOfContents]
+    endLevel = 5
+    ordered = false
+    startLevel = 1
+```
+
+# Generate icons
+
+It's best to use the provided `generate_icons.sh` script to generate all necessary icons for your website. This script requires ImageMagick, that you will need to install separately.
+
+For the best results, place your logo in svg format inside the `static` directory of your website, rename it to `logo.svg` and then call `./themes/hugo-ficurinia/generate_icons.sh static/logo.svg`.
+
+The script will take care of generating all the icons you need.
+
+Finally, make sure to edit your config.toml to include the following:
+
+```toml
+# ...
+[params]
+    logo = "/logo.svg"
+    logoAltText = "Logo"
+    favicon = "/favicon.png"
+    faviconIco = "/favicon.ico"
+    appletouch = "/apple-touch-icon.png"
+    svgicon = "/logo.svg"
+    # ...
+```
+
+# Inject custom content
+
+Ficurinia supports injecting custom content into the theme. There are several files you can create in `layouts/partials/inject` that will be included inside the theme in different places.
+
+| Partial | Placement |
+|---------|-----------|
+| `layouts/partials/inject/body.html` | Before closing the `body` tag |
+| `layouts/partials/inject/content-after.html` | After a post or page content |
+| `layouts/partials/inject/content-before.html` | Before a post or page content |
+| `layouts/partials/inject/footer.html` | At the beginning of the footer |
+| `layouts/partials/inject/head.html` | Before closing the `head` tag |
+| `layouts/partials/inject/header-after.html` | Before closing the header |
+| `layouts/partials/inject/header-before.html` | At the beginning of the header |
+
+# Does *Ficurinia* mean anything?
+
+It's Sicilian for Indian fig, also known as prickly pear cactus.
