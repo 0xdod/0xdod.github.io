@@ -3,14 +3,17 @@ title = 'Kubernetes and Cloud Native Architecture for Dummies'
 date = 2025-06-19T17:00:04+01:00
 draft = false
 tags = ['devops', 'kubernetes']
-image = "/images/posts/kubernetes/kubernetes-and-cloud-native-architecture-for-dummies.png"
+image = "images/featured-image.png"
 +++
 
 
 As someone who's just embarked on their [Kubernetes](https://kubernetes.io) journey and recently earned the [KCNA](https://training.linuxfoundation.org/certification/kubernetes-cloud-native-associate/) (Kubernetes and Cloud Native Associate) certification, I want to share my understanding of what Kubernetes and the [cloud native](https://cncf.io) world are all about.
 
+So GRWM as I explain kubernetes to you!! 🚀
 
-## Life Before Kubernetes: The Monolithic Era and Its Challenges
+---
+
+## The Monolithic Era and Its Challenges
 
 Before Kubernetes, applications were often built and deployed as a monolith. A typical traditional application sits in a large, single codebase containing all its functionalities – user interface, business logic, database interactions, everything bundled into one big monolith.
 
@@ -55,7 +58,7 @@ At its heart, **Kubernetes (often abbreviated as K8s)** is an open-source platfo
 
 Think of it as an operating system for your infrastructure, specifically tailored for containers. Instead of managing individual servers, you tell Kubernetes what you want your application to look like (e.g., "I want 3 instances of my web server, and they should be accessible on port 80"), and Kubernetes handles the heavy lifting of making that happen.
 
-## Why Kubernetes? The Power of Automation
+## Why Kubernetes?
 
 Kubernetes addresses the challenges of managing modern, containerized applications by providing:
 
@@ -76,7 +79,7 @@ Kubernetes addresses the challenges of managing modern, containerized applicatio
 
 In essence, Kubernetes allows developers to focus on writing code, while operations teams can manage infrastructure more efficiently and reliably.
 
-## How Kubernetes Works: An Architectural Overview
+## Kubernetes architecture
 
 Kubernetes operates in a cluster, on a **master-worker architecture**. A cluster is a logical collection of physical or virtual servers.
 
@@ -101,7 +104,7 @@ Kubernetes operates in a cluster, on a **master-worker architecture**. A cluster
 
 You, as the user, interact with the **API Server** (usually via the `kubectl` command-line tool) to tell Kubernetes what you want. The control plane then works behind the scenes to ensure your desired state is achieved and maintained across the worker nodes.
 
-## Cloud Native: The Bigger Picture
+## What Even is Cloud Native
 
 Kubernetes is a cornerstone of the **Cloud Native** ecosystem. "Cloud Native" is an approach to building and running applications that takes full advantage of the cloud computing model with an emphasis on cost-efficiency, reliability and faster-time-to-market.
 It's about more than just running apps in the cloud, it's about how you design, build, and operate them.
