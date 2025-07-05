@@ -19,14 +19,7 @@
     {{ if .Params.Image }}
         <figure style="margin: 0">
             {{ if or (hasPrefix .Params.Image "/") (hasPrefix .Params.Image "http://") (hasPrefix .Params.Image "https://") }}
-                {{ $image := "" }}
-                {{ if (hasPrefix .Params.Image "http") }}
-                  {{ $image = resources.GetRemote .Params.Image }}
-                {{ else }}
-                {{ $image = resources.Get .Params.Image }}
-                {{ end }}
-                {{ $image := $image.Resize "x400" }}
-                <img src="{{ $image.RelPermalink }}" alt="{{ .Params.Alt }}" width="{{ $image.Width }}" height="{{ $image.Height }}">
+                <img src="{{ .Params.Image }}" alt="{{ .Params.Alt }}">
             {{ else }}
                 <img src="{{ .Permalink }}/{{ .Params.Image }}" alt="{{ .Params.Alt }}"/>
             {{ end }}

@@ -1,7 +1,7 @@
 +++
 title = 'Deploying and Monitoring a Full-Stack App with Modern DevOps Tools.'
 date = 2024-11-27T01:50:50+01:00
-draft = true
+draft = false
 tags = ['devops', 'docker']
 +++
 
