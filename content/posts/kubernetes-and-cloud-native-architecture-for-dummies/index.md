@@ -1,7 +1,7 @@
 +++
 title = 'Kubernetes and Cloud Native Architecture for Dummies'
 date = 2025-06-19T17:00:04+01:00
-draft = false
+draft = true
 tags = ['devops', 'kubernetes']
 image = "images/featured-image.png"
 +++

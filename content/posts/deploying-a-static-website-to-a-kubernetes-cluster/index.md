@@ -1,7 +1,7 @@
 +++
 title = 'Deploying a Static Website to a Kubernetes Cluster'
 date = 2025-06-26T21:05:38+01:00
-draft = false
+draft = true
 tags = ['devops', 'kubernetes']
 image = "images/featured-image.png"
 +++

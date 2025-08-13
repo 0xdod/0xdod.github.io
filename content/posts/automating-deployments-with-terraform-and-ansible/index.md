@@ -1,7 +1,7 @@
 +++
 title = 'Automating Deployments with Terraform and Ansible'
 date = 2024-12-03T15:38:25+01:00
-draft = false
+draft = true
 tags = ['devops', 'terraform', 'ansible', 'automation']
 +++
 

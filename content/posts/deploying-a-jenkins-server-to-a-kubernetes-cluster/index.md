@@ -1,7 +1,7 @@
 +++
 title = 'Deploying a Jenkins Server to a Kubernetes Cluster'
 date = 2025-07-03T19:13:52+01:00
-draft = false
+draft = true
 tags = ['devops', 'kubernetes']
 image = "images/featured-image.png"
 +++
@@ -12,7 +12,7 @@ Welcome to the second project in my Kubernetes project series! This time, we're 
 
 The goal here is to understand how persistent storage is managed in kubernetes.
 
-Stateful apps like Jenkins need to store data across pod restarts like pipeline configurations, plugins, and credentials. We'll achieve that using **Persistent Volumes (PV)** and **Persistent Volume Claims (PVC)** in Kubernetes.
+Stateful applications like Jenkins need to store data across pod restarts like pipeline configurations, plugins, and credentials. We'll achieve that using **Persistent Volumes (PV)** and **Persistent Volume Claims (PVC)** in Kubernetes.
 
 ---
 
