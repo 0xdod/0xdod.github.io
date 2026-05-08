@@ -408,7 +408,7 @@ h6 {font-size: 0.7 * $base_font_size * $title_font_mult;}
     display: grid;
     grid-gap: $margin;
     margin-bottom: $margin;
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(100%, 1fr);
     &.gridView {
         grid-template-columns: repeat(auto-fit, minmax(325px, 1fr));
     }

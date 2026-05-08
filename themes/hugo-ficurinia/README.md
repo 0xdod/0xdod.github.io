@@ -36,7 +36,9 @@ summaryLength = 70  # number of words for article summaries
     pagerSize = 5  # number of articles per page in the index
 
 [params]
-    author = "Gabriele Musco"
+    [params.author]
+        name = "Gabriele Musco"
+        email = "email@example.com" # optional, you can omit this
     description = "A description for my website"  # this will be added as metadata
 
     posts = "posts"  # content directory where to find home page posts; default searches in "posts" and "post"

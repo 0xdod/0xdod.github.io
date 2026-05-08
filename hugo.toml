@@ -1,22 +1,24 @@
-baseURL = "https://0xdod.github.io/"
+baseURL = "https://0xdod.github.io"
 theme = "hugo-ficurinia"
-title = "Damilola Dolor"
+title = "dod"
 languageCode = "en"
 defaultContentLanguage = "en"
 
 # this will be included in the footer after the current year the site is last
 # built, followed by the (c) symbol
 # you can use markdown inside this field
-copyright = "Damilola"
+# copyright = "Some copyright notice - [my license](https://example.com/license)"
 
-summaryLength = 50  # number of words for article summaries
+summaryLength = 70  # number of words for article summaries
 
 [pagination]
     pagerSize = 5  # number of articles per page in the index
 
 [params]
-    author = "Damilola Dolor"
-    description = ""  # this will be added as metadata
+    [params.author]
+        name = "damilola dolor"
+        email = "damiloladolor@gmail.com" # optional, you can omit this
+    description = "Damilola Dolor's blog on programming and tech stuff"  # this will be added as metadata
 
     posts = "posts"  # content directory where to find home page posts; default searches in "posts" and "post"
     showPostsLink = true  # show or hide the link to the simple post list
@@ -77,23 +79,23 @@ summaryLength = 50  # number of words for article summaries
     underlineTitleLinks = false  # show an underline also for links that are titles
 
     # enable comments support with commento using the script from your server
-    commento = "https://example.com/js/commento.js"
+    # commento = "https://example.com/js/commento.js"
 
     # enable comments support with cactus comments (cactus.chat)
-    cactusCommentsSiteName = "example.com"
-    cactusCommentsServerName = "cactus.chat"
-    cactusCommentsHomeserver = "https://matrix.cactus.chat:8448"
+    # cactusCommentsSiteName = "example.com"
+    # cactusCommentsServerName = "cactus.chat"
+    # cactusCommentsHomeserver = "https://matrix.cactus.chat:8448"
 
     # enable analytics using Plausible
-    plausibleScriptUrl = "https://something.com/..."
-    plausibleDomain = "example.com"
+    # plausibleScriptUrl = "https://something.com/..."
+    # plausibleDomain = "example.com"
 
     # enable analytics using Umami
-    umamiScriptUrl = "https://something.com/..."
-    umamiWebsiteId = "example-tracking-code"
+    # umamiScriptUrl = "https://something.com/..."
+    # umamiWebsiteId = "example-tracking-code"
 
-    enableShareOnFediverse = false  # enable a button at the end of an article to share it on the fediverse
-    fediverseAccount = "@username@instance.com"  # Automatically add your username under the post when anyone shares your articles
+    # enableShareOnFediverse = false  # enable a button at the end of an article to share it on the fediverse
+    # fediverseAccount = "@username@instance.com"  # Automatically add your username under the post when anyone shares your articles
     tocBeforeImage = false  # show the table of contents before the main article image; default false
 
     # WARNING: deprecated! Use [[menu.icons]] instead, look below
@@ -140,17 +142,16 @@ summaryLength = 50  # number of words for article summaries
     # these links (menu.icons) will be added as icon links below the main nav
     [[menu.icons]]
         identifier = "github"
-        name = "Github"
+        name = "GitHub"
         url = "https://github.com/0xdod"
         weight = 10
     [[menu.icons]]
         identifier = "twitter"
         name = "Twitter"
-        url = "https://twitter.com/0xdod"
+        url = "https://x.com/0xdod"
         weight = 20
 
 # this section is necessary if you want infinite scrolling
 # it allows to output the article list as paged JSON so that "pages" can be retrieved via javascript
 [outputs]
     home = ["HTML", "JSON"]
-
