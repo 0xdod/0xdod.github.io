@@ -1,13 +1,15 @@
 +++
-title = '👋 About Me'
+title = '👋 about me'
 draft = false
 showDate = false
 +++
 
-Hi, I'm a software engineer with over 4 years of experience building scalable backend systems and cloud-native applications.
+hi, i'm damilola, a backend-focused software engineer with over 5 years of experience building scalable, reliable cloud-native systems.
 
-I mostly work with TypeScript and Go, with a strong focus on developer experience, API design, and good architecture. I've worked across various domains such as edtech, fintech, and blockchain/crypto, shipping products that handle real money, real users, and real-world complexity. I care about reliability, clarity, and performance.
+my toolbox spans go, typescript, postgresql, aws and gcp with a very keen interest in blockchain technology, databases and distributed systems. i'm passionate about ai-enabled tooling and the engineering discipline that makes complex systems feel simple to use.
 
-Outside work when I'm not writing code, I am inside my house.
+i have worked across various domains including edtech, fintech, and blockchain/crypto, shipping products that handle real money, real users, and real-world complexity. i care about reliability, clarity, and performance.
 
-You can also find me on [Twitter](https://twitter.com/0xdod), [GitHub](https://github.com/0xdod), [LinkedIn](https://linkedin.com/in/damilola-dolor97).
+outside work when i'm not writing code, i am inside my house, thinking about system design or on youtube watching lectures and debates on philosophy and history, or exploring new music.
+
+you can also find me on [twitter](https://twitter.com/0xdod), [github](https://github.com/0xdod), [linkedin](https://linkedin.com/in/damilola-dolor97).
